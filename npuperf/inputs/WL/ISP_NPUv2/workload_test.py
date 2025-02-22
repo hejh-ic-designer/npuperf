@@ -1,0 +1,17 @@
+workload = {   
+    -1: {   'equation': 'input',
+            'loop_dim_size': {'B': 1, 'K': 64, 'OY': 512, 'OX': 512},
+            'precision': 8,
+            'core_allocation': 1,
+            'memory_operand_links': {'O': 'I1'}},
+    0: {   'operator_type': 'Conv',
+           'equation': 'O[b][k][oy][ox]+=W[k][c][fy][fx]*I[b][c][ix][iy]',
+           'equation_relations': ['ix=1*ox+1*fx', 'iy=1*oy+1*fy'],
+           'loop_dim_size': {'B': 1, 'K': 64, 'C': 64, 'OY': 512, 'OX': 512, 'FY': 3, 'FX': 3},
+           'operand_precision': {'O': 16, 'O_final': 8, 'W': 8, 'I': 8},
+           'operand_source': {'W': [], 'I': [-1]},
+           'constant_operands': ['W'],
+           'core_allocation': 1,
+           'spatial_mapping': {'D1': ('K', 4), 'D2': ('C', 4), 'D3': ('OX', 32), 'D4': ('OY', 4)},
+           'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}},
+}

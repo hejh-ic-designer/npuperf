@@ -1,0 +1,36 @@
+{
+    "MAC_unroll": {
+        "K": 32,
+        "C": 2,
+        "OX": 4,
+        "OY": 4
+    },
+    "local_buffers": [
+        {
+            "op": "W",
+            "size": 64
+        },
+        {
+            "op": "W",
+            "size": 1024
+        },
+        {
+            "op": "I",
+            "size": 32
+        },
+        {
+            "op": "O",
+            "size": 128
+        }
+    ],
+    "global_buffer": {
+        "op": "I/O",
+        "size": 1,
+        "bandwidth": 1024
+    },
+    "dram": {
+        "op": "W/I/O",
+        "size": 4,
+        "bandwidth": 256
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "input_names": ["input"],
+  "layers": [{
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_Conv_0_PART_0_0_fuse_bias_add_Conv_0_1",
+    "attrs": {
+      "channels": 64,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [2, 2, 2, 2],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "input",
+      "dim": [1, 64, 512, 512],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_0",
+      "dim": [64, 64, 3, 3],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_1",
+      "dim": [64],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_0",
+      "dim": [1, 64, 512, 512],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }]
+}

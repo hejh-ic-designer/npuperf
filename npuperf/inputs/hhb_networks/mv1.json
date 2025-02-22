@@ -1,0 +1,1453 @@
+{
+  "input_names": ["data_input"],
+  "layers": [{
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv1_0_fuse_multiply_1_fuse_add_conv1/bn_PART_0_2",
+    "attrs": {
+      "channels": 32,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [2, 2]
+    },
+    "inputs": [{
+      "name": "data_input",
+      "dim": [1, 3, 224, 224],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_0",
+      "dim": [32, 3, 3, 3],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_1",
+      "dim": [32],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_0",
+      "dim": [1, 32, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu1_3",
+    "inputs": [{
+      "name": "tensor_0",
+      "dim": [1, 32, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_1",
+      "dim": [1, 32, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv2_1/dw_4_fuse_multiply_5_fuse_add_conv2_1/dw/bn_PART_0_6",
+    "attrs": {
+      "channels": 32,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 32,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_1",
+      "dim": [1, 32, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_2",
+      "dim": [32, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_3",
+      "dim": [32],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_2",
+      "dim": [1, 32, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu2_1/dw_7",
+    "inputs": [{
+      "name": "tensor_2",
+      "dim": [1, 32, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_3",
+      "dim": [1, 32, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv2_1/sep_8_fuse_multiply_9_fuse_add_conv2_1/sep/bn_PART_0_10",
+    "attrs": {
+      "channels": 64,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_3",
+      "dim": [1, 32, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_4",
+      "dim": [64, 32, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_5",
+      "dim": [64],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_4",
+      "dim": [1, 64, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu2_1/sep_11",
+    "inputs": [{
+      "name": "tensor_4",
+      "dim": [1, 64, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_5",
+      "dim": [1, 64, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv2_2/dw_12_fuse_multiply_13_fuse_add_conv2_2/dw/bn_PART_0_14",
+    "attrs": {
+      "channels": 64,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 64,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [2, 2]
+    },
+    "inputs": [{
+      "name": "tensor_5",
+      "dim": [1, 64, 112, 112],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_6",
+      "dim": [64, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_7",
+      "dim": [64],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_6",
+      "dim": [1, 64, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu2_2/dw_15",
+    "inputs": [{
+      "name": "tensor_6",
+      "dim": [1, 64, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_7",
+      "dim": [1, 64, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv2_2/sep_16_fuse_multiply_17_fuse_add_conv2_2/sep/bn_PART_0_18",
+    "attrs": {
+      "channels": 128,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_7",
+      "dim": [1, 64, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_8",
+      "dim": [128, 64, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_9",
+      "dim": [128],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_8",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu2_2/sep_19",
+    "inputs": [{
+      "name": "tensor_8",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_9",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv3_1/dw_20_fuse_multiply_21_fuse_add_conv3_1/dw/bn_PART_0_22",
+    "attrs": {
+      "channels": 128,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 128,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_9",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_10",
+      "dim": [128, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_11",
+      "dim": [128],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_10",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu3_1/dw_23",
+    "inputs": [{
+      "name": "tensor_10",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_11",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv3_1/sep_24_fuse_multiply_25_fuse_add_conv3_1/sep/bn_PART_0_26",
+    "attrs": {
+      "channels": 128,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_11",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_12",
+      "dim": [128, 128, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_13",
+      "dim": [128],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_12",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu3_1/sep_27",
+    "inputs": [{
+      "name": "tensor_12",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_13",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv3_2/dw_28_fuse_multiply_29_fuse_add_conv3_2/dw/bn_PART_0_30",
+    "attrs": {
+      "channels": 128,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 128,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [2, 2]
+    },
+    "inputs": [{
+      "name": "tensor_13",
+      "dim": [1, 128, 56, 56],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_14",
+      "dim": [128, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_15",
+      "dim": [128],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_14",
+      "dim": [1, 128, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu3_2/dw_31",
+    "inputs": [{
+      "name": "tensor_14",
+      "dim": [1, 128, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_15",
+      "dim": [1, 128, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv3_2/sep_32_fuse_multiply_33_fuse_add_conv3_2/sep/bn_PART_0_34",
+    "attrs": {
+      "channels": 256,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_15",
+      "dim": [1, 128, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_16",
+      "dim": [256, 128, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_17",
+      "dim": [256],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_16",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu3_2/sep_35",
+    "inputs": [{
+      "name": "tensor_16",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_17",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv4_1/dw_36_fuse_multiply_37_fuse_add_conv4_1/dw/bn_PART_0_38",
+    "attrs": {
+      "channels": 256,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 256,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_17",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_18",
+      "dim": [256, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_19",
+      "dim": [256],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_18",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu4_1/dw_39",
+    "inputs": [{
+      "name": "tensor_18",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_19",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv4_1/sep_40_fuse_multiply_41_fuse_add_conv4_1/sep/bn_PART_0_42",
+    "attrs": {
+      "channels": 256,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_19",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_20",
+      "dim": [256, 256, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_21",
+      "dim": [256],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_20",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu4_1/sep_43",
+    "inputs": [{
+      "name": "tensor_20",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_21",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv4_2/dw_44_fuse_multiply_45_fuse_add_conv4_2/dw/bn_PART_0_46",
+    "attrs": {
+      "channels": 256,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 256,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [2, 2]
+    },
+    "inputs": [{
+      "name": "tensor_21",
+      "dim": [1, 256, 28, 28],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_22",
+      "dim": [256, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_23",
+      "dim": [256],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_22",
+      "dim": [1, 256, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu4_2/dw_47",
+    "inputs": [{
+      "name": "tensor_22",
+      "dim": [1, 256, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_23",
+      "dim": [1, 256, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv4_2/sep_48_fuse_multiply_49_fuse_add_conv4_2/sep/bn_PART_0_50",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_23",
+      "dim": [1, 256, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_24",
+      "dim": [512, 256, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_25",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_24",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu4_2/sep_51",
+    "inputs": [{
+      "name": "tensor_24",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_25",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_1/dw_52_fuse_multiply_53_fuse_add_conv5_1/dw/bn_PART_0_54",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 512,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_25",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_26",
+      "dim": [512, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_27",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_26",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_1/dw_55",
+    "inputs": [{
+      "name": "tensor_26",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_27",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_1/sep_56_fuse_multiply_57_fuse_add_conv5_1/sep/bn_PART_0_58",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_27",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_28",
+      "dim": [512, 512, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_29",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_28",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_1/sep_59",
+    "inputs": [{
+      "name": "tensor_28",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_29",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_2/dw_60_fuse_multiply_61_fuse_add_conv5_2/dw/bn_PART_0_62",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 512,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_29",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_30",
+      "dim": [512, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_31",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_30",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_2/dw_63",
+    "inputs": [{
+      "name": "tensor_30",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_31",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_2/sep_64_fuse_multiply_65_fuse_add_conv5_2/sep/bn_PART_0_66",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_31",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_32",
+      "dim": [512, 512, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_33",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_32",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_2/sep_67",
+    "inputs": [{
+      "name": "tensor_32",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_33",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_3/dw_68_fuse_multiply_69_fuse_add_conv5_3/dw/bn_PART_0_70",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 512,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_33",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_34",
+      "dim": [512, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_35",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_34",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_3/dw_71",
+    "inputs": [{
+      "name": "tensor_34",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_35",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_3/sep_72_fuse_multiply_73_fuse_add_conv5_3/sep/bn_PART_0_74",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_35",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_36",
+      "dim": [512, 512, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_37",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_36",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_3/sep_75",
+    "inputs": [{
+      "name": "tensor_36",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_37",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_4/dw_76_fuse_multiply_77_fuse_add_conv5_4/dw/bn_PART_0_78",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 512,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_37",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_38",
+      "dim": [512, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_39",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_38",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_4/dw_79",
+    "inputs": [{
+      "name": "tensor_38",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_39",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_4/sep_80_fuse_multiply_81_fuse_add_conv5_4/sep/bn_PART_0_82",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_39",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_40",
+      "dim": [512, 512, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_41",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_40",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_4/sep_83",
+    "inputs": [{
+      "name": "tensor_40",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_41",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_5/dw_84_fuse_multiply_85_fuse_add_conv5_5/dw/bn_PART_0_86",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 512,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_41",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_42",
+      "dim": [512, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_43",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_42",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_5/dw_87",
+    "inputs": [{
+      "name": "tensor_42",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_43",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_5/sep_88_fuse_multiply_89_fuse_add_conv5_5/sep/bn_PART_0_90",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_43",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_44",
+      "dim": [512, 512, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_45",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_44",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_5/sep_91",
+    "inputs": [{
+      "name": "tensor_44",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_45",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_6/dw_92_fuse_multiply_93_fuse_add_conv5_6/dw/bn_PART_0_94",
+    "attrs": {
+      "channels": 512,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 512,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [2, 2]
+    },
+    "inputs": [{
+      "name": "tensor_45",
+      "dim": [1, 512, 14, 14],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_46",
+      "dim": [512, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_47",
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_46",
+      "dim": [1, 512, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_6/dw_95",
+    "inputs": [{
+      "name": "tensor_46",
+      "dim": [1, 512, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_47",
+      "dim": [1, 512, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv5_6/sep_96_fuse_multiply_97_fuse_add_conv5_6/sep/bn_PART_0_98",
+    "attrs": {
+      "channels": 1024,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_47",
+      "dim": [1, 512, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_48",
+      "dim": [1024, 512, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_49",
+      "dim": [1024],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_48",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu5_6/sep_99",
+    "inputs": [{
+      "name": "tensor_48",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_49",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv6/dw_100_fuse_multiply_101_fuse_add_conv6/dw/bn_PART_0_102",
+    "attrs": {
+      "channels": 1024,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1024,
+      "kernel_layout": "OIHW",
+      "kernel_size": [3, 3],
+      "out_layout": "",
+      "padding": [1, 1, 1, 1],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_49",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_50",
+      "dim": [1024, 1, 3, 3],
+      "is_const": 1,
+      "layout": "O1HW"
+    }, {
+      "name": "const_51",
+      "dim": [1024],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_50",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu6/dw_103",
+    "inputs": [{
+      "name": "tensor_50",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_51",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_conv6/sep_104_fuse_multiply_105_fuse_add_conv6/sep/bn_PART_0_106",
+    "attrs": {
+      "channels": 1024,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_51",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_52",
+      "dim": [1024, 1024, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_53",
+      "dim": [1024],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_52",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.relu",
+    "name": "relu_relu6/sep_107",
+    "inputs": [{
+      "name": "tensor_52",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_53",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.global_avgpool2d",
+    "name": "global_avg_pool2d_pool6_108",
+    "attrs": {
+      "layout": "NCHW"
+    },
+    "inputs": [{
+      "name": "tensor_53",
+      "dim": [1, 1024, 7, 7],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_54",
+      "dim": [1, 1024, 1, 1],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.conv2d",
+    "name": "conv2d_fc7_PART_0_109_fuse_bias_add_fc7_110",
+    "attrs": {
+      "channels": 1000,
+      "data_layout": "NCHW",
+      "dilation": [1, 1],
+      "groups": 1,
+      "kernel_layout": "OIHW",
+      "kernel_size": [1, 1],
+      "out_layout": "",
+      "padding": [0, 0, 0, 0],
+      "strides": [1, 1]
+    },
+    "inputs": [{
+      "name": "tensor_54",
+      "dim": [1, 1024, 1, 1],
+      "is_const": 0,
+      "layout": "NCHW"
+    }, {
+      "name": "const_54",
+      "dim": [1000, 1024, 1, 1],
+      "is_const": 1,
+      "layout": "OIHW"
+    }, {
+      "name": "const_55",
+      "dim": [1000],
+      "is_const": 1,
+      "layout": "O"
+    }],
+    "outputs": [{
+      "name": "tensor_55",
+      "dim": [1, 1000, 1, 1],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }, {
+    "op_type": "qnn.csi.softmax",
+    "name": "softmax_prob_Y@@prob_111",
+    "attrs": {
+      "axis": 1
+    },
+    "inputs": [{
+      "name": "tensor_55",
+      "dim": [1, 1000, 1, 1],
+      "is_const": 0,
+      "layout": "NCHW"
+    }],
+    "outputs": [{
+      "name": "tensor_56",
+      "dim": [1, 1000, 1, 1],
+      "is_const": 0,
+      "layout": "NCHW"
+    }]
+  }]
+}

@@ -1,0 +1,185 @@
+workload = {
+    -1: {
+        'equation': 'input',
+        'loop_dim_size': {'B': 1, 'G': 128},
+        'precision': 8,
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'I1'}
+    },
+    0: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 1024, 'C': 1024, 'OX': 1024},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [-1]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    1: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 2048, 'C': 2048, 'OX': 2048},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [0]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    2: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 3072, 'C': 3072, 'OX': 3072},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [1]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    3: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 4096, 'C': 4096, 'OX': 4096},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [2]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    4: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 5120, 'C': 5120, 'OX': 5120},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [3]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    5: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 6144, 'C': 6144, 'OX': 6144},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [4]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    6: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 7168, 'C': 7168, 'OX': 7168},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [5]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    7: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 8192, 'C': 8192, 'OX': 8192},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [6]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    8: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 9216, 'C': 9216, 'OX': 9216},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [7]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    9: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 10240, 'C': 10240, 'OX': 10240},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [8]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    10: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 11264, 'C': 11264, 'OX': 11264},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [9]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    11: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 12288, 'C': 12288, 'OX': 12288},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [10]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    12: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 13312, 'C': 13312, 'OX': 13312},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [11]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    13: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 14336, 'C': 14336, 'OX': 14336},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [12]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    14: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 15360, 'C': 15360, 'OX': 15360},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [13]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+    15: {
+        'operator_type': 'Matmul',
+        'equation': 'O[k][ox]+=W[k][c]*I[c][ox]',
+        'equation_relations': [],
+        'loop_dim_size': {'K': 16384, 'C': 16384, 'OX': 16384},
+        'operand_precision': {'O': 16,'O_final': 8,'W': 8,'I': 8},
+        'operand_source': {'I': [14]},
+        'constant_operands': ['W'],
+        'core_allocation': 1,
+        'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
+    },
+}

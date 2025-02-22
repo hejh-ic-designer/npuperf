@@ -1,0 +1,5370 @@
+{
+  "input_names": ["embedding_out_0", "segment_ids_0", "input_mask_0"],
+  "layers": [{
+    "attrs": {
+      "units": null
+    },
+    "inputs": [{
+      "dim": [128, 2],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "segment_ids_0"
+    }, {
+      "dim": [512, 2],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_0"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_1"
+    }],
+    "name": "dense_bert/embeddings/MatMul_0",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_0"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 512]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_0"
+    }],
+    "name": "reshape_bert/embeddings/Reshape_1",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_1"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_1"
+    }, {
+      "dim": [1, 128, 512],
+      "is_const": 1,
+      "layout": "NCW",
+      "name": "const_2"
+    }],
+    "name": "add_bert/embeddings/add_2",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_2"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "embedding_out_0"
+    }, {
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_2"
+    }],
+    "name": "add_bert/embeddings/add_1_3",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_3"
+    }]
+  }, {
+    "attrs": {
+      "axis": [2],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_3"
+    }],
+    "name": "adaptive_avg_pool1d_bert/embeddings/LayerNorm/moments/mean_4",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_4"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_3"
+    }, {
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_4"
+    }],
+    "name": "subtract_bert/embeddings/LayerNorm/moments/SquaredDifference_5",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_5"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_5"
+    }, {
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_5"
+    }],
+    "name": "multiply_bert/embeddings/LayerNorm/moments/SquaredDifference__34_6",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_6"
+    }]
+  }, {
+    "attrs": {
+      "axis": [2],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_6"
+    }],
+    "name": "adaptive_avg_pool1d_bert/embeddings/LayerNorm/moments/variance_7",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_7"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_7"
+    }, {
+      "dim": [1, 1, 1],
+      "is_const": 1,
+      "layout": "NCW",
+      "name": "const_3"
+    }],
+    "name": "add_bert/embeddings/LayerNorm/batchnorm/add_8",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_8"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_8"
+    }],
+    "name": "sqrt_bert/embeddings/LayerNorm/batchnorm/Rsqrt_9",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_9"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_4"
+    }, {
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_9"
+    }],
+    "name": "divide_bert/embeddings/LayerNorm/batchnorm/Rsqrt__35_10",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_10"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_10"
+    }, {
+      "dim": [1, 1, 512],
+      "is_const": 1,
+      "layout": "NCW",
+      "name": "const_5"
+    }],
+    "name": "multiply_bert/embeddings/LayerNorm/batchnorm/mul_11",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_11"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_3"
+    }, {
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_11"
+    }],
+    "name": "multiply_bert/embeddings/LayerNorm/batchnorm/mul_1_12",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_12"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 1],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_4"
+    }, {
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_11"
+    }],
+    "name": "multiply_bert/embeddings/LayerNorm/batchnorm/mul_2_13",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_13"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_6"
+    }, {
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_13"
+    }],
+    "name": "subtract_bert/embeddings/LayerNorm/batchnorm/sub_14",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_14"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_12"
+    }, {
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_14"
+    }],
+    "name": "add_bert/embeddings/LayerNorm/batchnorm/add_1_15",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_15"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 512]
+    },
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_15"
+    }],
+    "name": "reshape_bert/encoder/Reshape_1_16",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_16"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_16"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_7"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_8"
+    }],
+    "name": "dense_bert/encoder/layer_0/attention/self/query/MatMul_Gemm__7_PART_0_17_fuse_add_bert/encoder/layer_0/attention/self/query/MatMul_Gemm__7_18",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_17"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_17"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/Reshape_19",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_18"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_18"
+    }],
+    "name": "transpose_bert/encoder/layer_0/attention/self/transpose_20",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_19"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 64]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_19"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/MatMul_PART_0_21",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_20"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_16"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_9"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_10"
+    }],
+    "name": "dense_bert/encoder/layer_0/attention/self/key/MatMul_Gemm__8_PART_0_22_fuse_add_bert/encoder/layer_0/attention/self/key/MatMul_Gemm__8_23",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_21"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_21"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/Reshape_1_24",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_22"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 3, 1]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_22"
+    }],
+    "name": "transpose_bert/encoder/layer_0/attention/self/MatMul__40_25",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 64, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_23"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 64, 128]
+    },
+    "inputs": [{
+      "dim": [1, 8, 64, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_23"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/MatMul_PART_1_26",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 64, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_24"
+    }]
+  }, {
+    "attrs": {
+      "transpose_a": 0,
+      "transpose_b": 0
+    },
+    "inputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_20"
+    }, {
+      "dim": [8, 64, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_24"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_11"
+    }],
+    "name": "batch_matmul_bert/encoder/layer_0/attention/self/MatMul_PART_2_27",
+    "op_type": "qnn.csi.matmul",
+    "outputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_25"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 8, 128, 128]
+    },
+    "inputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_25"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/MatMul_28",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_26"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_26"
+    }, {
+      "dim": [1, 1, 1, 1],
+      "is_const": 1,
+      "layout": "NCHW",
+      "name": "const_12"
+    }],
+    "name": "multiply_bert/encoder/layer_0/attention/self/Mul_29",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_27"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 1, 128]
+    },
+    "inputs": [{
+      "dim": [1, 128],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "input_mask_0"
+    }],
+    "name": "reshape_bert/encoder/Reshape_30",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 1, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_28"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 1, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_28"
+    }, {
+      "dim": [1, 128, 1],
+      "is_const": 1,
+      "layout": "NCW",
+      "name": "const_13"
+    }],
+    "name": "multiply_bert/encoder/mul_31",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_29"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 1, 128, 128]
+    },
+    "inputs": [{
+      "dim": [1, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_29"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/ExpandDims_32",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_30"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_14"
+    }, {
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_30"
+    }],
+    "name": "subtract_bert/encoder/layer_0/attention/self/sub_33",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_31"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_31"
+    }, {
+      "dim": [1, 1, 1, 1],
+      "is_const": 1,
+      "layout": "NCHW",
+      "name": "const_15"
+    }],
+    "name": "multiply_bert/encoder/layer_2/attention/self/mul_1_34",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_32"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_27"
+    }, {
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_32"
+    }],
+    "name": "add_bert/encoder/layer_0/attention/self/add_35",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_33"
+    }]
+  }, {
+    "attrs": {
+      "axis": 3
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_33"
+    }],
+    "name": "softmax_bert/encoder/layer_0/attention/self/Softmax_36",
+    "op_type": "qnn.csi.softmax",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_34"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 128]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_34"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/MatMul_1_PART_0_37",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_35"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_16"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_16"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_17"
+    }],
+    "name": "dense_bert/encoder/layer_0/attention/self/value/MatMul_Gemm__6_PART_0_38_fuse_add_bert/encoder/layer_0/attention/self/value/MatMul_Gemm__6_39",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_36"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_36"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/Reshape_2_40",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_37"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_37"
+    }],
+    "name": "transpose_bert/encoder/layer_0/attention/self/transpose_2_41",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_38"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 64]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_38"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/MatMul_1_PART_1_42",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_39"
+    }]
+  }, {
+    "attrs": {
+      "transpose_a": 0,
+      "transpose_b": 0
+    },
+    "inputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_35"
+    }, {
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_39"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_18"
+    }],
+    "name": "batch_matmul_bert/encoder/layer_0/attention/self/MatMul_1_PART_2_43",
+    "op_type": "qnn.csi.matmul",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_40"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 8, 128, 64]
+    },
+    "inputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_40"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/MatMul_1_44",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_41"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_41"
+    }],
+    "name": "transpose_bert/encoder/layer_0/attention/self/transpose_3_45",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_42"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [128, 512]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_42"
+    }],
+    "name": "reshape_bert/encoder/layer_0/attention/self/Reshape_3_46",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_43"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_43"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_19"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_20"
+    }],
+    "name": "dense_bert/encoder/layer_0/attention/output/dense/MatMul_Gemm__9_PART_0_47_fuse_add_bert/encoder/layer_0/attention/output/dense/MatMul_Gemm__9_48",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_44"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_44"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_16"
+    }],
+    "name": "add_bert/encoder/layer_0/attention/output/add_49",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_45"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_45"
+    }],
+    "name": "mean_bert/encoder/layer_0/attention/output/LayerNorm/moments/mean_50",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_46"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_45"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_46"
+    }],
+    "name": "subtract_bert/encoder/layer_0/attention/output/LayerNorm/moments/SquaredDifference_51",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_47"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_47"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_47"
+    }],
+    "name": "multiply_bert/encoder/layer_0/attention/output/LayerNorm/moments/SquaredDifference__42_52",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_48"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_48"
+    }],
+    "name": "mean_bert/encoder/layer_0/attention/output/LayerNorm/moments/variance_53",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_49"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_49"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_21"
+    }],
+    "name": "add_bert/encoder/layer_0/attention/output/LayerNorm/batchnorm/add_54",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_50"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_50"
+    }],
+    "name": "sqrt_bert/encoder/layer_0/attention/output/LayerNorm/batchnorm/Rsqrt_55",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_51"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_22"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_51"
+    }],
+    "name": "divide_bert/encoder/layer_0/attention/output/LayerNorm/batchnorm/Rsqrt__43_56",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_52"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_52"
+    }, {
+      "dim": [1, 512],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_23"
+    }],
+    "name": "multiply_bert/encoder/layer_0/attention/output/LayerNorm/batchnorm/mul_57",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_53"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_45"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_53"
+    }],
+    "name": "multiply_bert/encoder/layer_0/attention/output/LayerNorm/batchnorm/mul_1_58",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_54"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_46"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_53"
+    }],
+    "name": "multiply_bert/encoder/layer_0/attention/output/LayerNorm/batchnorm/mul_2_59",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_55"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_24"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_55"
+    }],
+    "name": "subtract_bert/encoder/layer_0/attention/output/LayerNorm/batchnorm/sub_60",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_56"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_54"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_56"
+    }],
+    "name": "add_bert/encoder/layer_0/attention/output/LayerNorm/batchnorm/add_1_61",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_57"
+    }]
+  }, {
+    "attrs": {
+      "units": 2048
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_57"
+    }, {
+      "dim": [2048, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_25"
+    }, {
+      "dim": [2048],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_26"
+    }],
+    "name": "dense_bert/encoder/layer_0/intermediate/dense/MatMul_Gemm__10_PART_0_62_fuse_add_bert/encoder/layer_0/intermediate/dense/MatMul_Gemm__10_63",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_58"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_58"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_27"
+    }],
+    "name": "power_bert/encoder/layer_0/intermediate/dense/Pow_64",
+    "op_type": "qnn.csi.power",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_59"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_59"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_28"
+    }],
+    "name": "multiply_bert/encoder/layer_0/intermediate/dense/mul_65",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_60"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_58"
+    }, {
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_60"
+    }],
+    "name": "add_bert/encoder/layer_0/intermediate/dense/add_66",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_61"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_61"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_29"
+    }],
+    "name": "multiply_bert/encoder/layer_0/intermediate/dense/mul_1_67",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_62"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_62"
+    }],
+    "name": "tanh_bert/encoder/layer_0/intermediate/dense/Tanh_68",
+    "op_type": "qnn.csi.tanh",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_63"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_63"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_30"
+    }],
+    "name": "add_bert/encoder/layer_0/intermediate/dense/add_1_69",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_64"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_64"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_31"
+    }],
+    "name": "multiply_bert/encoder/layer_0/intermediate/dense/mul_2_70",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_65"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_58"
+    }, {
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_65"
+    }],
+    "name": "multiply_bert/encoder/layer_0/intermediate/dense/mul_3_71",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_66"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_66"
+    }, {
+      "dim": [512, 2048],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_32"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_33"
+    }],
+    "name": "dense_bert/encoder/layer_0/output/dense/MatMul_Gemm__11_PART_0_72_fuse_add_bert/encoder/layer_0/output/dense/MatMul_Gemm__11_73",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_67"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_67"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_57"
+    }],
+    "name": "add_bert/encoder/layer_0/output/add_74",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_68"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_68"
+    }],
+    "name": "mean_bert/encoder/layer_0/output/LayerNorm/moments/mean_75",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_69"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_68"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_69"
+    }],
+    "name": "subtract_bert/encoder/layer_0/output/LayerNorm/moments/SquaredDifference_76",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_70"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_70"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_70"
+    }],
+    "name": "multiply_bert/encoder/layer_0/output/LayerNorm/moments/SquaredDifference__44_77",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_71"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_71"
+    }],
+    "name": "mean_bert/encoder/layer_0/output/LayerNorm/moments/variance_78",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_72"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_72"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_34"
+    }],
+    "name": "add_bert/encoder/layer_0/output/LayerNorm/batchnorm/add_79",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_73"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_73"
+    }],
+    "name": "sqrt_bert/encoder/layer_0/output/LayerNorm/batchnorm/Rsqrt_80",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_74"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_35"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_74"
+    }],
+    "name": "divide_bert/encoder/layer_0/output/LayerNorm/batchnorm/Rsqrt__45_81",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_75"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_75"
+    }, {
+      "dim": [1, 512],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_36"
+    }],
+    "name": "multiply_bert/encoder/layer_0/output/LayerNorm/batchnorm/mul_82",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_76"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_68"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_76"
+    }],
+    "name": "multiply_bert/encoder/layer_0/output/LayerNorm/batchnorm/mul_1_83",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_77"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_69"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_76"
+    }],
+    "name": "multiply_bert/encoder/layer_0/output/LayerNorm/batchnorm/mul_2_84",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_78"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_37"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_78"
+    }],
+    "name": "subtract_bert/encoder/layer_0/output/LayerNorm/batchnorm/sub_85",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_79"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_77"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_79"
+    }],
+    "name": "add_bert/encoder/layer_0/output/LayerNorm/batchnorm/add_1_86",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_80"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_80"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_38"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_39"
+    }],
+    "name": "dense_bert/encoder/layer_1/attention/self/query/MatMul_Gemm__13_PART_0_87_fuse_add_bert/encoder/layer_1/attention/self/query/MatMul_Gemm__13_88",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_81"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_81"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/Reshape_89",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_82"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_82"
+    }],
+    "name": "transpose_bert/encoder/layer_1/attention/self/transpose_90",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_83"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 64]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_83"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/MatMul_PART_0_91",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_84"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_80"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_40"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_41"
+    }],
+    "name": "dense_bert/encoder/layer_1/attention/self/key/MatMul_Gemm__14_PART_0_92_fuse_add_bert/encoder/layer_1/attention/self/key/MatMul_Gemm__14_93",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_85"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_85"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/Reshape_1_94",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_86"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 3, 1]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_86"
+    }],
+    "name": "transpose_bert/encoder/layer_1/attention/self/MatMul__49_95",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 64, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_87"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 64, 128]
+    },
+    "inputs": [{
+      "dim": [1, 8, 64, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_87"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/MatMul_PART_1_96",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 64, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_88"
+    }]
+  }, {
+    "attrs": {
+      "transpose_a": 0,
+      "transpose_b": 0
+    },
+    "inputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_84"
+    }, {
+      "dim": [8, 64, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_88"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_42"
+    }],
+    "name": "batch_matmul_bert/encoder/layer_1/attention/self/MatMul_PART_2_97",
+    "op_type": "qnn.csi.matmul",
+    "outputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_89"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 8, 128, 128]
+    },
+    "inputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_89"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/MatMul_98",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_90"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_90"
+    }, {
+      "dim": [1, 1, 1, 1],
+      "is_const": 1,
+      "layout": "NCHW",
+      "name": "const_43"
+    }],
+    "name": "multiply_bert/encoder/layer_1/attention/self/Mul_99",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_91"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_91"
+    }, {
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_32"
+    }],
+    "name": "add_bert/encoder/layer_1/attention/self/add_100",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_92"
+    }]
+  }, {
+    "attrs": {
+      "axis": 3
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_92"
+    }],
+    "name": "softmax_bert/encoder/layer_1/attention/self/Softmax_101",
+    "op_type": "qnn.csi.softmax",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_93"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 128]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_93"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/MatMul_1_PART_0_102",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_94"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_80"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_44"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_45"
+    }],
+    "name": "dense_bert/encoder/layer_1/attention/self/value/MatMul_Gemm__12_PART_0_103_fuse_add_bert/encoder/layer_1/attention/self/value/MatMul_Gemm__12_104",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_95"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_95"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/Reshape_2_105",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_96"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_96"
+    }],
+    "name": "transpose_bert/encoder/layer_1/attention/self/transpose_2_106",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_97"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 64]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_97"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/MatMul_1_PART_1_107",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_98"
+    }]
+  }, {
+    "attrs": {
+      "transpose_a": 0,
+      "transpose_b": 0
+    },
+    "inputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_94"
+    }, {
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_98"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_46"
+    }],
+    "name": "batch_matmul_bert/encoder/layer_1/attention/self/MatMul_1_PART_2_108",
+    "op_type": "qnn.csi.matmul",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_99"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 8, 128, 64]
+    },
+    "inputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_99"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/MatMul_1_109",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_100"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_100"
+    }],
+    "name": "transpose_bert/encoder/layer_1/attention/self/transpose_3_110",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_101"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [128, 512]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_101"
+    }],
+    "name": "reshape_bert/encoder/layer_1/attention/self/Reshape_3_111",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_102"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_102"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_47"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_48"
+    }],
+    "name": "dense_bert/encoder/layer_1/attention/output/dense/MatMul_Gemm__15_PART_0_112_fuse_add_bert/encoder/layer_1/attention/output/dense/MatMul_Gemm__15_113",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_103"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_103"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_80"
+    }],
+    "name": "add_bert/encoder/layer_1/attention/output/add_114",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_104"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_104"
+    }],
+    "name": "mean_bert/encoder/layer_1/attention/output/LayerNorm/moments/mean_115",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_105"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_104"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_105"
+    }],
+    "name": "subtract_bert/encoder/layer_1/attention/output/LayerNorm/moments/SquaredDifference_116",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_106"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_106"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_106"
+    }],
+    "name": "multiply_bert/encoder/layer_1/attention/output/LayerNorm/moments/SquaredDifference__51_117",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_107"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_107"
+    }],
+    "name": "mean_bert/encoder/layer_1/attention/output/LayerNorm/moments/variance_118",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_108"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_108"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_49"
+    }],
+    "name": "add_bert/encoder/layer_1/attention/output/LayerNorm/batchnorm/add_119",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_109"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_109"
+    }],
+    "name": "sqrt_bert/encoder/layer_1/attention/output/LayerNorm/batchnorm/Rsqrt_120",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_110"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_50"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_110"
+    }],
+    "name": "divide_bert/encoder/layer_1/attention/output/LayerNorm/batchnorm/Rsqrt__52_121",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_111"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_111"
+    }, {
+      "dim": [1, 512],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_51"
+    }],
+    "name": "multiply_bert/encoder/layer_1/attention/output/LayerNorm/batchnorm/mul_122",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_112"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_104"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_112"
+    }],
+    "name": "multiply_bert/encoder/layer_1/attention/output/LayerNorm/batchnorm/mul_1_123",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_113"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_105"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_112"
+    }],
+    "name": "multiply_bert/encoder/layer_1/attention/output/LayerNorm/batchnorm/mul_2_124",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_114"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_52"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_114"
+    }],
+    "name": "subtract_bert/encoder/layer_1/attention/output/LayerNorm/batchnorm/sub_125",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_115"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_113"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_115"
+    }],
+    "name": "add_bert/encoder/layer_1/attention/output/LayerNorm/batchnorm/add_1_126",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_116"
+    }]
+  }, {
+    "attrs": {
+      "units": 2048
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_116"
+    }, {
+      "dim": [2048, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_53"
+    }, {
+      "dim": [2048],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_54"
+    }],
+    "name": "dense_bert/encoder/layer_1/intermediate/dense/MatMul_Gemm__16_PART_0_127_fuse_add_bert/encoder/layer_1/intermediate/dense/MatMul_Gemm__16_128",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_117"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_117"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_55"
+    }],
+    "name": "power_bert/encoder/layer_1/intermediate/dense/Pow_129",
+    "op_type": "qnn.csi.power",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_118"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_118"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_56"
+    }],
+    "name": "multiply_bert/encoder/layer_1/intermediate/dense/mul_130",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_119"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_117"
+    }, {
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_119"
+    }],
+    "name": "add_bert/encoder/layer_1/intermediate/dense/add_131",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_120"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_120"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_57"
+    }],
+    "name": "multiply_bert/encoder/layer_1/intermediate/dense/mul_1_132",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_121"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_121"
+    }],
+    "name": "tanh_bert/encoder/layer_1/intermediate/dense/Tanh_133",
+    "op_type": "qnn.csi.tanh",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_122"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_122"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_58"
+    }],
+    "name": "add_bert/encoder/layer_1/intermediate/dense/add_1_134",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_123"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_123"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_59"
+    }],
+    "name": "multiply_bert/encoder/layer_1/intermediate/dense/mul_2_135",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_124"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_117"
+    }, {
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_124"
+    }],
+    "name": "multiply_bert/encoder/layer_1/intermediate/dense/mul_3_136",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_125"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_125"
+    }, {
+      "dim": [512, 2048],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_60"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_61"
+    }],
+    "name": "dense_bert/encoder/layer_1/output/dense/MatMul_Gemm__17_PART_0_137_fuse_add_bert/encoder/layer_1/output/dense/MatMul_Gemm__17_138",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_126"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_126"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_116"
+    }],
+    "name": "add_bert/encoder/layer_1/output/add_139",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_127"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_127"
+    }],
+    "name": "mean_bert/encoder/layer_1/output/LayerNorm/moments/mean_140",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_128"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_127"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_128"
+    }],
+    "name": "subtract_bert/encoder/layer_1/output/LayerNorm/moments/SquaredDifference_141",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_129"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_129"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_129"
+    }],
+    "name": "multiply_bert/encoder/layer_1/output/LayerNorm/moments/SquaredDifference__53_142",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_130"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_130"
+    }],
+    "name": "mean_bert/encoder/layer_1/output/LayerNorm/moments/variance_143",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_131"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_131"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_62"
+    }],
+    "name": "add_bert/encoder/layer_1/output/LayerNorm/batchnorm/add_144",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_132"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_132"
+    }],
+    "name": "sqrt_bert/encoder/layer_1/output/LayerNorm/batchnorm/Rsqrt_145",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_133"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_63"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_133"
+    }],
+    "name": "divide_bert/encoder/layer_1/output/LayerNorm/batchnorm/Rsqrt__54_146",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_134"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_134"
+    }, {
+      "dim": [1, 512],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_64"
+    }],
+    "name": "multiply_bert/encoder/layer_1/output/LayerNorm/batchnorm/mul_147",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_135"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_127"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_135"
+    }],
+    "name": "multiply_bert/encoder/layer_1/output/LayerNorm/batchnorm/mul_1_148",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_136"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_128"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_135"
+    }],
+    "name": "multiply_bert/encoder/layer_1/output/LayerNorm/batchnorm/mul_2_149",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_137"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_65"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_137"
+    }],
+    "name": "subtract_bert/encoder/layer_1/output/LayerNorm/batchnorm/sub_150",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_138"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_136"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_138"
+    }],
+    "name": "add_bert/encoder/layer_1/output/LayerNorm/batchnorm/add_1_151",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_139"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_139"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_66"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_67"
+    }],
+    "name": "dense_bert/encoder/layer_2/attention/self/query/MatMul_Gemm__19_PART_0_152_fuse_add_bert/encoder/layer_2/attention/self/query/MatMul_Gemm__19_153",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_140"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_140"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/Reshape_154",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_141"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_141"
+    }],
+    "name": "transpose_bert/encoder/layer_2/attention/self/transpose_155",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_142"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 64]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_142"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/MatMul_PART_0_156",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_143"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_139"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_68"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_69"
+    }],
+    "name": "dense_bert/encoder/layer_2/attention/self/key/MatMul_Gemm__20_PART_0_157_fuse_add_bert/encoder/layer_2/attention/self/key/MatMul_Gemm__20_158",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_144"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_144"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/Reshape_1_159",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_145"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 3, 1]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_145"
+    }],
+    "name": "transpose_bert/encoder/layer_2/attention/self/MatMul__58_160",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 64, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_146"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 64, 128]
+    },
+    "inputs": [{
+      "dim": [1, 8, 64, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_146"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/MatMul_PART_1_161",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 64, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_147"
+    }]
+  }, {
+    "attrs": {
+      "transpose_a": 0,
+      "transpose_b": 0
+    },
+    "inputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_143"
+    }, {
+      "dim": [8, 64, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_147"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_70"
+    }],
+    "name": "batch_matmul_bert/encoder/layer_2/attention/self/MatMul_PART_2_162",
+    "op_type": "qnn.csi.matmul",
+    "outputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_148"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 8, 128, 128]
+    },
+    "inputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_148"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/MatMul_163",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_149"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_149"
+    }, {
+      "dim": [1, 1, 1, 1],
+      "is_const": 1,
+      "layout": "NCHW",
+      "name": "const_71"
+    }],
+    "name": "multiply_bert/encoder/layer_2/attention/self/Mul_164",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_150"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_150"
+    }, {
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_32"
+    }],
+    "name": "add_bert/encoder/layer_2/attention/self/add_165",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_151"
+    }]
+  }, {
+    "attrs": {
+      "axis": 3
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_151"
+    }],
+    "name": "softmax_bert/encoder/layer_2/attention/self/Softmax_166",
+    "op_type": "qnn.csi.softmax",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_152"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 128]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_152"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/MatMul_1_PART_0_167",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_153"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_139"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_72"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_73"
+    }],
+    "name": "dense_bert/encoder/layer_2/attention/self/value/MatMul_Gemm__18_PART_0_168_fuse_add_bert/encoder/layer_2/attention/self/value/MatMul_Gemm__18_169",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_154"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_154"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/Reshape_2_170",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_155"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_155"
+    }],
+    "name": "transpose_bert/encoder/layer_2/attention/self/transpose_2_171",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_156"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 64]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_156"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/MatMul_1_PART_1_172",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_157"
+    }]
+  }, {
+    "attrs": {
+      "transpose_a": 0,
+      "transpose_b": 0
+    },
+    "inputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_153"
+    }, {
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_157"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_74"
+    }],
+    "name": "batch_matmul_bert/encoder/layer_2/attention/self/MatMul_1_PART_2_173",
+    "op_type": "qnn.csi.matmul",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_158"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 8, 128, 64]
+    },
+    "inputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_158"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/MatMul_1_174",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_159"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_159"
+    }],
+    "name": "transpose_bert/encoder/layer_2/attention/self/transpose_3_175",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_160"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [128, 512]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_160"
+    }],
+    "name": "reshape_bert/encoder/layer_2/attention/self/Reshape_3_176",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_161"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_161"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_75"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_76"
+    }],
+    "name": "dense_bert/encoder/layer_2/attention/output/dense/MatMul_Gemm__21_PART_0_177_fuse_add_bert/encoder/layer_2/attention/output/dense/MatMul_Gemm__21_178",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_162"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_162"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_139"
+    }],
+    "name": "add_bert/encoder/layer_2/attention/output/add_179",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_163"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_163"
+    }],
+    "name": "mean_bert/encoder/layer_2/attention/output/LayerNorm/moments/mean_180",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_164"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_163"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_164"
+    }],
+    "name": "subtract_bert/encoder/layer_2/attention/output/LayerNorm/moments/SquaredDifference_181",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_165"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_165"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_165"
+    }],
+    "name": "multiply_bert/encoder/layer_2/attention/output/LayerNorm/moments/SquaredDifference__60_182",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_166"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_166"
+    }],
+    "name": "mean_bert/encoder/layer_2/attention/output/LayerNorm/moments/variance_183",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_167"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_167"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_77"
+    }],
+    "name": "add_bert/encoder/layer_2/attention/output/LayerNorm/batchnorm/add_184",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_168"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_168"
+    }],
+    "name": "sqrt_bert/encoder/layer_2/attention/output/LayerNorm/batchnorm/Rsqrt_185",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_169"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_78"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_169"
+    }],
+    "name": "divide_bert/encoder/layer_2/attention/output/LayerNorm/batchnorm/Rsqrt__61_186",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_170"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_170"
+    }, {
+      "dim": [1, 512],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_79"
+    }],
+    "name": "multiply_bert/encoder/layer_2/attention/output/LayerNorm/batchnorm/mul_187",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_171"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_163"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_171"
+    }],
+    "name": "multiply_bert/encoder/layer_2/attention/output/LayerNorm/batchnorm/mul_1_188",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_172"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_164"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_171"
+    }],
+    "name": "multiply_bert/encoder/layer_2/attention/output/LayerNorm/batchnorm/mul_2_189",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_173"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_80"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_173"
+    }],
+    "name": "subtract_bert/encoder/layer_2/attention/output/LayerNorm/batchnorm/sub_190",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_174"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_172"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_174"
+    }],
+    "name": "add_bert/encoder/layer_2/attention/output/LayerNorm/batchnorm/add_1_191",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_175"
+    }]
+  }, {
+    "attrs": {
+      "units": 2048
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_175"
+    }, {
+      "dim": [2048, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_81"
+    }, {
+      "dim": [2048],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_82"
+    }],
+    "name": "dense_bert/encoder/layer_2/intermediate/dense/MatMul_Gemm__22_PART_0_192_fuse_add_bert/encoder/layer_2/intermediate/dense/MatMul_Gemm__22_193",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_176"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_176"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_83"
+    }],
+    "name": "power_bert/encoder/layer_2/intermediate/dense/Pow_194",
+    "op_type": "qnn.csi.power",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_177"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_177"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_84"
+    }],
+    "name": "multiply_bert/encoder/layer_2/intermediate/dense/mul_195",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_178"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_176"
+    }, {
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_178"
+    }],
+    "name": "add_bert/encoder/layer_2/intermediate/dense/add_196",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_179"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_179"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_85"
+    }],
+    "name": "multiply_bert/encoder/layer_2/intermediate/dense/mul_1_197",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_180"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_180"
+    }],
+    "name": "tanh_bert/encoder/layer_2/intermediate/dense/Tanh_198",
+    "op_type": "qnn.csi.tanh",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_181"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_181"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_86"
+    }],
+    "name": "add_bert/encoder/layer_2/intermediate/dense/add_1_199",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_182"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_182"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_87"
+    }],
+    "name": "multiply_bert/encoder/layer_2/intermediate/dense/mul_2_200",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_183"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_176"
+    }, {
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_183"
+    }],
+    "name": "multiply_bert/encoder/layer_2/intermediate/dense/mul_3_201",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_184"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_184"
+    }, {
+      "dim": [512, 2048],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_88"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_89"
+    }],
+    "name": "dense_bert/encoder/layer_2/output/dense/MatMul_Gemm__23_PART_0_202_fuse_add_bert/encoder/layer_2/output/dense/MatMul_Gemm__23_203",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_185"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_185"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_175"
+    }],
+    "name": "add_bert/encoder/layer_2/output/add_204",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_186"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_186"
+    }],
+    "name": "mean_bert/encoder/layer_2/output/LayerNorm/moments/mean_205",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_187"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_186"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_187"
+    }],
+    "name": "subtract_bert/encoder/layer_2/output/LayerNorm/moments/SquaredDifference_206",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_188"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_188"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_188"
+    }],
+    "name": "multiply_bert/encoder/layer_2/output/LayerNorm/moments/SquaredDifference__62_207",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_189"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_189"
+    }],
+    "name": "mean_bert/encoder/layer_2/output/LayerNorm/moments/variance_208",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_190"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_190"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_90"
+    }],
+    "name": "add_bert/encoder/layer_2/output/LayerNorm/batchnorm/add_209",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_191"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_191"
+    }],
+    "name": "sqrt_bert/encoder/layer_2/output/LayerNorm/batchnorm/Rsqrt_210",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_192"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_91"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_192"
+    }],
+    "name": "divide_bert/encoder/layer_2/output/LayerNorm/batchnorm/Rsqrt__63_211",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_193"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_193"
+    }, {
+      "dim": [1, 512],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_92"
+    }],
+    "name": "multiply_bert/encoder/layer_2/output/LayerNorm/batchnorm/mul_212",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_194"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_186"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_194"
+    }],
+    "name": "multiply_bert/encoder/layer_2/output/LayerNorm/batchnorm/mul_1_213",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_195"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_187"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_194"
+    }],
+    "name": "multiply_bert/encoder/layer_2/output/LayerNorm/batchnorm/mul_2_214",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_196"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_93"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_196"
+    }],
+    "name": "subtract_bert/encoder/layer_2/output/LayerNorm/batchnorm/sub_215",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_197"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_195"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_197"
+    }],
+    "name": "add_bert/encoder/layer_2/output/LayerNorm/batchnorm/add_1_216",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_198"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_198"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_94"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_95"
+    }],
+    "name": "dense_bert/encoder/layer_3/attention/self/query/MatMul_Gemm__25_PART_0_217_fuse_add_bert/encoder/layer_3/attention/self/query/MatMul_Gemm__25_218",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_199"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_199"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/Reshape_219",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_200"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_200"
+    }],
+    "name": "transpose_bert/encoder/layer_3/attention/self/transpose_220",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_201"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 64]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_201"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/MatMul_PART_0_221",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_202"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_198"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_96"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_97"
+    }],
+    "name": "dense_bert/encoder/layer_3/attention/self/key/MatMul_Gemm__26_PART_0_222_fuse_add_bert/encoder/layer_3/attention/self/key/MatMul_Gemm__26_223",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_203"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_203"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/Reshape_1_224",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_204"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 3, 1]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_204"
+    }],
+    "name": "transpose_bert/encoder/layer_3/attention/self/MatMul__67_225",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 64, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_205"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 64, 128]
+    },
+    "inputs": [{
+      "dim": [1, 8, 64, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_205"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/MatMul_PART_1_226",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 64, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_206"
+    }]
+  }, {
+    "attrs": {
+      "transpose_a": 0,
+      "transpose_b": 0
+    },
+    "inputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_202"
+    }, {
+      "dim": [8, 64, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_206"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_98"
+    }],
+    "name": "batch_matmul_bert/encoder/layer_3/attention/self/MatMul_PART_2_227",
+    "op_type": "qnn.csi.matmul",
+    "outputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_207"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 8, 128, 128]
+    },
+    "inputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_207"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/MatMul_228",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_208"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_208"
+    }, {
+      "dim": [1, 1, 1, 1],
+      "is_const": 1,
+      "layout": "NCHW",
+      "name": "const_99"
+    }],
+    "name": "multiply_bert/encoder/layer_3/attention/self/Mul_229",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_209"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_209"
+    }, {
+      "dim": [1, 1, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_32"
+    }],
+    "name": "add_bert/encoder/layer_3/attention/self/add_230",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_210"
+    }]
+  }, {
+    "attrs": {
+      "axis": 3
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_210"
+    }],
+    "name": "softmax_bert/encoder/layer_3/attention/self/Softmax_231",
+    "op_type": "qnn.csi.softmax",
+    "outputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_211"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 128]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 128],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_211"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/MatMul_1_PART_0_232",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_212"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_198"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_100"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_101"
+    }],
+    "name": "dense_bert/encoder/layer_3/attention/self/value/MatMul_Gemm__24_PART_0_233_fuse_add_bert/encoder/layer_3/attention/self/value/MatMul_Gemm__24_234",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_213"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 8, 64]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_213"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/Reshape_2_235",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_214"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_214"
+    }],
+    "name": "transpose_bert/encoder/layer_3/attention/self/transpose_2_236",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_215"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [-1, 128, 64]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_215"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/MatMul_1_PART_1_237",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_216"
+    }]
+  }, {
+    "attrs": {
+      "transpose_a": 0,
+      "transpose_b": 0
+    },
+    "inputs": [{
+      "dim": [8, 128, 128],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_212"
+    }, {
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_216"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_102"
+    }],
+    "name": "batch_matmul_bert/encoder/layer_3/attention/self/MatMul_1_PART_2_238",
+    "op_type": "qnn.csi.matmul",
+    "outputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_217"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 8, 128, 64]
+    },
+    "inputs": [{
+      "dim": [8, 128, 64],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_217"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/MatMul_1_239",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_218"
+    }]
+  }, {
+    "attrs": {
+      "axes": [0, 2, 1, 3]
+    },
+    "inputs": [{
+      "dim": [1, 8, 128, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_218"
+    }],
+    "name": "transpose_bert/encoder/layer_3/attention/self/transpose_3_240",
+    "op_type": "qnn.csi.transpose",
+    "outputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_219"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [128, 512]
+    },
+    "inputs": [{
+      "dim": [1, 128, 8, 64],
+      "is_const": 0,
+      "layout": "NCHW",
+      "name": "tensor_219"
+    }],
+    "name": "reshape_bert/encoder/layer_3/attention/self/Reshape_3_241",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_220"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_220"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_103"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_104"
+    }],
+    "name": "dense_bert/encoder/layer_3/attention/output/dense/MatMul_Gemm__27_PART_0_242_fuse_add_bert/encoder/layer_3/attention/output/dense/MatMul_Gemm__27_243",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_221"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_221"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_198"
+    }],
+    "name": "add_bert/encoder/layer_3/attention/output/add_244",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_222"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_222"
+    }],
+    "name": "mean_bert/encoder/layer_3/attention/output/LayerNorm/moments/mean_245",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_223"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_222"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_223"
+    }],
+    "name": "subtract_bert/encoder/layer_3/attention/output/LayerNorm/moments/SquaredDifference_246",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_224"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_224"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_224"
+    }],
+    "name": "multiply_bert/encoder/layer_3/attention/output/LayerNorm/moments/SquaredDifference__69_247",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_225"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_225"
+    }],
+    "name": "mean_bert/encoder/layer_3/attention/output/LayerNorm/moments/variance_248",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_226"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_226"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_105"
+    }],
+    "name": "add_bert/encoder/layer_3/attention/output/LayerNorm/batchnorm/add_249",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_227"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_227"
+    }],
+    "name": "sqrt_bert/encoder/layer_3/attention/output/LayerNorm/batchnorm/Rsqrt_250",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_228"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_106"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_228"
+    }],
+    "name": "divide_bert/encoder/layer_3/attention/output/LayerNorm/batchnorm/Rsqrt__70_251",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_229"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_229"
+    }, {
+      "dim": [1, 512],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_107"
+    }],
+    "name": "multiply_bert/encoder/layer_3/attention/output/LayerNorm/batchnorm/mul_252",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_230"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_222"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_230"
+    }],
+    "name": "multiply_bert/encoder/layer_3/attention/output/LayerNorm/batchnorm/mul_1_253",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_231"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_223"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_230"
+    }],
+    "name": "multiply_bert/encoder/layer_3/attention/output/LayerNorm/batchnorm/mul_2_254",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_232"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_108"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_232"
+    }],
+    "name": "subtract_bert/encoder/layer_3/attention/output/LayerNorm/batchnorm/sub_255",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_233"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_231"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_233"
+    }],
+    "name": "add_bert/encoder/layer_3/attention/output/LayerNorm/batchnorm/add_1_256",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_234"
+    }]
+  }, {
+    "attrs": {
+      "units": 2048
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_234"
+    }, {
+      "dim": [2048, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_109"
+    }, {
+      "dim": [2048],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_110"
+    }],
+    "name": "dense_bert/encoder/layer_3/intermediate/dense/MatMul_Gemm__28_PART_0_257_fuse_add_bert/encoder/layer_3/intermediate/dense/MatMul_Gemm__28_258",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_235"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_235"
+    }, {
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_111"
+    }],
+    "name": "power_bert/encoder/layer_3/intermediate/dense/Pow_259",
+    "op_type": "qnn.csi.power",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_236"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_236"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_112"
+    }],
+    "name": "multiply_bert/encoder/layer_3/intermediate/dense/mul_260",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_237"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_235"
+    }, {
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_237"
+    }],
+    "name": "add_bert/encoder/layer_3/intermediate/dense/add_261",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_238"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_238"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_113"
+    }],
+    "name": "multiply_bert/encoder/layer_3/intermediate/dense/mul_1_262",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_239"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_239"
+    }],
+    "name": "tanh_bert/encoder/layer_3/intermediate/dense/Tanh_263",
+    "op_type": "qnn.csi.tanh",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_240"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_240"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_114"
+    }],
+    "name": "add_bert/encoder/layer_3/intermediate/dense/add_1_264",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_241"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_241"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_115"
+    }],
+    "name": "multiply_bert/encoder/layer_3/intermediate/dense/mul_2_265",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_242"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_235"
+    }, {
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_242"
+    }],
+    "name": "multiply_bert/encoder/layer_3/intermediate/dense/mul_3_266",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_243"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [128, 2048],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_243"
+    }, {
+      "dim": [512, 2048],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_116"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_117"
+    }],
+    "name": "dense_bert/encoder/layer_3/output/dense/MatMul_Gemm__29_PART_0_267_fuse_add_bert/encoder/layer_3/output/dense/MatMul_Gemm__29_268",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_244"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_244"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_234"
+    }],
+    "name": "add_bert/encoder/layer_3/output/add_269",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_245"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_245"
+    }],
+    "name": "mean_bert/encoder/layer_3/output/LayerNorm/moments/mean_270",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_246"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_245"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_246"
+    }],
+    "name": "subtract_bert/encoder/layer_3/output/LayerNorm/moments/SquaredDifference_271",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_247"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_247"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_247"
+    }],
+    "name": "multiply_bert/encoder/layer_3/output/LayerNorm/moments/SquaredDifference__71_272",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_248"
+    }]
+  }, {
+    "attrs": {
+      "axis": [1],
+      "exclude": 0,
+      "keepdims": 1
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_248"
+    }],
+    "name": "mean_bert/encoder/layer_3/output/LayerNorm/moments/variance_273",
+    "op_type": "qnn.csi.mean",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_249"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_249"
+    }, {
+      "dim": [1, 1],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_118"
+    }],
+    "name": "add_bert/encoder/layer_3/output/LayerNorm/batchnorm/add_274",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_250"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_250"
+    }],
+    "name": "sqrt_bert/encoder/layer_3/output/LayerNorm/batchnorm/Rsqrt_275",
+    "op_type": "qnn.csi.sqrt",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_251"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_119"
+    }, {
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_251"
+    }],
+    "name": "divide_bert/encoder/layer_3/output/LayerNorm/batchnorm/Rsqrt__72_276",
+    "op_type": "qnn.csi.div",
+    "outputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_252"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_252"
+    }, {
+      "dim": [1, 512],
+      "is_const": 1,
+      "layout": "NC",
+      "name": "const_120"
+    }],
+    "name": "multiply_bert/encoder/layer_3/output/LayerNorm/batchnorm/mul_277",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_253"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_245"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_253"
+    }],
+    "name": "multiply_bert/encoder/layer_3/output/LayerNorm/batchnorm/mul_1_278",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_254"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 1],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_246"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_253"
+    }],
+    "name": "multiply_bert/encoder/layer_3/output/LayerNorm/batchnorm/mul_2_279",
+    "op_type": "qnn.csi.mul",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_255"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [512],
+      "is_const": 1,
+      "layout": "N",
+      "name": "const_121"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_255"
+    }],
+    "name": "subtract_bert/encoder/layer_3/output/LayerNorm/batchnorm/sub_280",
+    "op_type": "qnn.csi.subtract",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_256"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_254"
+    }, {
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_256"
+    }],
+    "name": "add_bert/encoder/layer_3/output/LayerNorm/batchnorm/add_1_281",
+    "op_type": "qnn.csi.add",
+    "outputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_257"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 128, 512]
+    },
+    "inputs": [{
+      "dim": [128, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_257"
+    }],
+    "name": "reshape_bert/encoder/Reshape_5_282",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_258"
+    }]
+  }, {
+    "attrs": {
+      "begin": [0, 0, 0],
+      "end": [2147483647, 1, 2147483647],
+      "strides": [1, 1, 1]
+    },
+    "inputs": [{
+      "dim": [1, 128, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_258"
+    }],
+    "name": "strided_slice_bert/pooler/strided_slice_283",
+    "op_type": "qnn.csi.strided_slice",
+    "outputs": [{
+      "dim": [1, 1, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_259"
+    }]
+  }, {
+    "attrs": {
+      "newshape": [1, 512]
+    },
+    "inputs": [{
+      "dim": [1, 1, 512],
+      "is_const": 0,
+      "layout": "NCW",
+      "name": "tensor_259"
+    }],
+    "name": "squeeze_bert/pooler/Squeeze_284",
+    "op_type": "qnn.csi.reshape",
+    "outputs": [{
+      "dim": [1, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_260"
+    }]
+  }, {
+    "attrs": {
+      "units": 512
+    },
+    "inputs": [{
+      "dim": [1, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_260"
+    }, {
+      "dim": [512, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_122"
+    }, {
+      "dim": [512],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_123"
+    }],
+    "name": "dense_bert/pooler/dense/MatMul_Gemm__30_PART_0_285_fuse_add_bert/pooler/dense/MatMul_Gemm__30_286",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [1, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_261"
+    }]
+  }, {
+    "inputs": [{
+      "dim": [1, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_261"
+    }],
+    "name": "tanh_bert/pooler/dense/Tanh_287",
+    "op_type": "qnn.csi.tanh",
+    "outputs": [{
+      "dim": [1, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_262"
+    }]
+  }, {
+    "attrs": {
+      "units": 2
+    },
+    "inputs": [{
+      "dim": [1, 512],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_262"
+    }, {
+      "dim": [2, 512],
+      "is_const": 1,
+      "layout": "OI",
+      "name": "const_124"
+    }, {
+      "dim": [2],
+      "is_const": 1,
+      "layout": "O",
+      "name": "const_125"
+    }],
+    "name": "dense_loss/MatMul_Gemm__31_PART_0_288_fuse_add_loss/BiasAdd:0@@loss/MatMul_Gemm__31_289",
+    "op_type": "qnn.csi.dense",
+    "outputs": [{
+      "dim": [1, 2],
+      "is_const": 0,
+      "layout": "NC",
+      "name": "tensor_263"
+    }]
+  }]
+}

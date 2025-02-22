@@ -1,0 +1,13 @@
+name: NPUPERFenv
+channels:
+  - defaults
+dependencies:
+  - python>=3.10
+  - numpy
+  - networkx
+  - sympy
+  - matplotlib
+  - multiprocessing_on_dill
+
+
+  
