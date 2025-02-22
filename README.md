@@ -30,9 +30,12 @@
 4. 设置包路径: (出现类似“ModuleNotFoundError: No module named 'npuperf'”的错误时, 请使用)
    - 使用`cd` 转到顶层目录
    - 设置包路径，将当前工作目录加入到PYTHONPATH环境变量中
+
+    如果在macOS、Linux下，使用
     ```bash
     export PYTHONPATH=${PWD}:${PYTHONPATH}
     ```
+
     如果在Windows下，应使用
     ```bash
     $env:PYTHONPATH = "$PWD;$env:PYTHONPATH"
@@ -44,13 +47,13 @@
 
 ### First Run
 
-- 我们选择的网络为 `resnet50`，定义网络的文件位于[workload_resnet50.py](/npuperf/inputs/WL_fromjson/Meta_prototype/workload_resnet50.py)
+- 我们选择的网络为 `mv1`，定义网络的文件位于[workload_mv1.py](/npuperf/inputs/WL_fromjson/Meta_prototype/workload_mv1.py)
 
 - 我们选择的DLA为 `Meta_prototype`，定义DLA的文件位于[Meta_prototype.py](/npuperf/inputs/HW/Meta_prototype.py)
 
 - 在终端输入
 ```
-python main_LBL.py
+python tools/main_LBL.py
 ```
 即可逐层评估网络，每层依次输出能量、延迟等结果信息
 
@@ -64,12 +67,19 @@ About 0.5 - 5 seconds per layer
 
 ### Analyzing Results
 
-在路径[/outputs/Meta_prototype-resnet50/](/outputs/Meta_prototype-resnet50/)下会逐层输出json格式的评估结果，每一个文件都对应了网络的一层，输出的评估结果中包含了energy, latency, MAC utilization, memory utilization, temporal mapping等信息
+在路径[/outputs/Meta_prototype-mv1/](/outputs/Meta_prototype--mv1/)下会逐层输出json格式的评估结果，每一个文件都对应了网络的一层，输出的评估结果中包含了energy, latency, MAC utilization, memory utilization, temporal mapping等信息
 
-若需要添加或减少显示信息，请在[cost_model.py](/npuperf/classes/cost_model/cost_model.py#L1064)中修改`__simplejsonrepr__`函数
+- 路径[/outputs/Meta_prototype--mv1/All_Layers.json](/outputs/Meta_prototype--mv1/All_Layers.json)包含了整个网络的统计信息
+- 路径[/result_plot/Meta_prototype--mv1/total.png](/result_plot/Meta_prototype--mv1/total.png)为每层网络的能耗和延迟
+- 路径[/result_plot/Meta_prototype--mv1/breakdown.png](/result_plot/Meta_prototype--mv1/breakdown.png)为能耗和延迟的分解图
+- 路径[/result_plot/Meta_prototype--mv1/temoporal_mapping.txt](/result_plot/Meta_prototype--mv1/temoporal_mapping.txt)为每层使用的时间映射
+
+若需要添加或减少显示信息，请在[cost_model.py](/npuperf/classes/cost_model/cost_model.py)中修改`__simplejsonrepr__`或`__jsonrepr__`函数(取决于你使用了SimpleSaveStage还是CompleteSaveStage)
 
 
 ## Reference
 
 - [DeFiNES](https://github.com/KULeuven-MICAS/DeFiNES): MICAS (KU Leuven)实验室开源的支持层融合的深度学习加速器建模和设计空间探索框架
 - [zigzag](https://github.com/KULeuven-MICAS/zigzag): MICAS (KU Leuven)实验室开源的用于深度学习加速器的硬件架构映射设计空间探索框架
+
+

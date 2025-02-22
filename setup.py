@@ -38,7 +38,7 @@ setup(
         "networkx",
         "sympy",
         "matplotlib",
-        "multiprocessing_on_dill",
+        # "multiprocessing_on_dill",
     ],
     python_requires='>=3.10',
     packages=find_packages(),

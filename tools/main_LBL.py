@@ -15,7 +15,8 @@ accelerator_path='npuperf.inputs.HW.Meta_prototype'
 hw_name = accelerator_path.split('.')[-1]
 
 #! here to setting WL path
-workload_path = f'npuperf.inputs.WL_fromjson.{hw_name}.workload_fsrcnn2x'
+workload_path = f'npuperf.inputs.WL_fromjson.{hw_name}.workload_mv1'
+# workload_path = f'npuperf.inputs.WL_fromjson.{hw_name}.workload_fsrcnn2x'
 # workload_path = f'npuperf.inputs.WL_fromjson.{hw_name}.workload_fcn8s'
 # workload_path = f'npuperf.inputs.WL_fromjson.{hw_name}.workload_resnet50'
 # workload_path = f'npuperf.inputs.WL_fromjson.{hw_name}.workload_conv_test'

@@ -9,7 +9,7 @@ from .MemOpRenameFor2LayerOpShareSameMemOpStage import MemOpRenameFor2LayerOpSha
 from .PlotTemporalMappingsStage import PlotTemporalMappingsStage
 from .ReduceStages import MinimalEnergyStage, MinimalLatencyStage, SumStage
 from .RunOptStages import (CacheBeforeYieldStage, MultiProcessingGatherStage, MultiProcessingSpawnStage, RemoveExtraInfoStage, SkipIfDumpExistsStage, YieldNothingStage)
-from .SalsaStage import SalsaStage
+# from .SalsaStage import SalsaStage
 from .SaveStage import (CompleteSaveStage, PickleSaveStage, SimpleSaveStage, SumAndSaveAllLayersStage)
 from .SimpleMappingGeneratorStage import MappingGeneratorStage
 from .SpatialMappingConversionStage import SpatialMappingConversionStage
