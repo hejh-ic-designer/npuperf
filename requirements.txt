@@ -1,0 +1,7 @@
+numpy~=2.2.4
+matplotlib~=3.10.0
+networkx~=3.4.2
+sympy~=1.13.3
+setuptools~=72.1.0
+onnx~=1.17.0
+protobuf~=5.29.3
