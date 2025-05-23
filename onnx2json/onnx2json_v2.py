@@ -108,4 +108,4 @@ def convert_onnx_to_json(onnx_path, out_path):
     export_json(json_model, out_path)
 
 # 示例调用
-# convert_onnx_to_json("resnet50.onnx", "resnet50_converted.json")
+convert_onnx_to_json("./onnx_models/resnet50.onnx", "./json_models/resnet50_onnx2json_v2.json")

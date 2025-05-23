@@ -5,3 +5,5 @@ sympy~=1.13.3
 setuptools~=72.1.0
 onnx~=1.17.0
 protobuf~=5.29.3
+torch~=2.7.0
+torchvision~=0.22.0

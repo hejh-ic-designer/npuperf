@@ -1,0 +1,3396 @@
+{
+  "input_names": [
+    "data_input",
+    "fc.weight",
+    "fc.bias",
+    "onnx::Conv_497",
+    "onnx::Conv_498",
+    "onnx::Conv_500",
+    "onnx::Conv_501",
+    "onnx::Conv_503",
+    "onnx::Conv_504",
+    "onnx::Conv_506",
+    "onnx::Conv_507",
+    "onnx::Conv_509",
+    "onnx::Conv_510",
+    "onnx::Conv_512",
+    "onnx::Conv_513",
+    "onnx::Conv_515",
+    "onnx::Conv_516",
+    "onnx::Conv_518",
+    "onnx::Conv_519",
+    "onnx::Conv_521",
+    "onnx::Conv_522",
+    "onnx::Conv_524",
+    "onnx::Conv_525",
+    "onnx::Conv_527",
+    "onnx::Conv_528",
+    "onnx::Conv_530",
+    "onnx::Conv_531",
+    "onnx::Conv_533",
+    "onnx::Conv_534",
+    "onnx::Conv_536",
+    "onnx::Conv_537",
+    "onnx::Conv_539",
+    "onnx::Conv_540",
+    "onnx::Conv_542",
+    "onnx::Conv_543",
+    "onnx::Conv_545",
+    "onnx::Conv_546",
+    "onnx::Conv_548",
+    "onnx::Conv_549",
+    "onnx::Conv_551",
+    "onnx::Conv_552",
+    "onnx::Conv_554",
+    "onnx::Conv_555",
+    "onnx::Conv_557",
+    "onnx::Conv_558",
+    "onnx::Conv_560",
+    "onnx::Conv_561",
+    "onnx::Conv_563",
+    "onnx::Conv_564",
+    "onnx::Conv_566",
+    "onnx::Conv_567",
+    "onnx::Conv_569",
+    "onnx::Conv_570",
+    "onnx::Conv_572",
+    "onnx::Conv_573",
+    "onnx::Conv_575",
+    "onnx::Conv_576",
+    "onnx::Conv_578",
+    "onnx::Conv_579",
+    "onnx::Conv_581",
+    "onnx::Conv_582",
+    "onnx::Conv_584",
+    "onnx::Conv_585",
+    "onnx::Conv_587",
+    "onnx::Conv_588",
+    "onnx::Conv_590",
+    "onnx::Conv_591",
+    "onnx::Conv_593",
+    "onnx::Conv_594",
+    "onnx::Conv_596",
+    "onnx::Conv_597",
+    "onnx::Conv_599",
+    "onnx::Conv_600",
+    "onnx::Conv_602",
+    "onnx::Conv_603",
+    "onnx::Conv_605",
+    "onnx::Conv_606",
+    "onnx::Conv_608",
+    "onnx::Conv_609",
+    "onnx::Conv_611",
+    "onnx::Conv_612",
+    "onnx::Conv_614",
+    "onnx::Conv_615",
+    "onnx::Conv_617",
+    "onnx::Conv_618",
+    "onnx::Conv_620",
+    "onnx::Conv_621",
+    "onnx::Conv_623",
+    "onnx::Conv_624",
+    "onnx::Conv_626",
+    "onnx::Conv_627",
+    "onnx::Conv_629",
+    "onnx::Conv_630",
+    "onnx::Conv_632",
+    "onnx::Conv_633",
+    "onnx::Conv_635",
+    "onnx::Conv_636",
+    "onnx::Conv_638",
+    "onnx::Conv_639",
+    "onnx::Conv_641",
+    "onnx::Conv_642",
+    "onnx::Conv_644",
+    "onnx::Conv_645",
+    "onnx::Conv_647",
+    "onnx::Conv_648",
+    "onnx::Conv_650",
+    "onnx::Conv_651",
+    "onnx::Conv_653",
+    "onnx::Conv_654"
+  ],
+  "layers": [
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "data_input",
+          "dim": [
+            0,
+            3,
+            224,
+            224
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_497",
+          "dim": [
+            64,
+            3,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_498",
+          "dim": [
+            64
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/relu/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            112,
+            112
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.maxpool",
+      "name": "/maxpool/MaxPool",
+      "inputs": [
+        {
+          "name": "/relu/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            112,
+            112
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/maxpool/MaxPool_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.0/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/maxpool/MaxPool_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_500",
+          "dim": [
+            64,
+            64,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_501",
+          "dim": [
+            64
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.0/relu/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.0/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.0/relu/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_503",
+          "dim": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_504",
+          "dim": [
+            64
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.0/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.0/conv3/Conv",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.0/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_506",
+          "dim": [
+            256,
+            64,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_507",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.0/conv3/Conv_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.0/downsample/downsample.0/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/maxpool/MaxPool_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_509",
+          "dim": [
+            256,
+            64,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_510",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.0/Add_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer1/layer1.0/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.0/Add_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.0/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.1/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.0/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_512",
+          "dim": [
+            64,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_513",
+          "dim": [
+            64
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.1/relu/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.1/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.1/relu/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_515",
+          "dim": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_516",
+          "dim": [
+            64
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.1/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.1/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.1/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_518",
+          "dim": [
+            256,
+            64,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_519",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.1/Add_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer1/layer1.1/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.1/Add_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.1/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.2/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.1/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_521",
+          "dim": [
+            64,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_522",
+          "dim": [
+            64
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.2/relu/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.2/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.2/relu/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_524",
+          "dim": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_525",
+          "dim": [
+            64
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.2/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer1/layer1.2/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.2/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            64,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_527",
+          "dim": [
+            256,
+            64,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_528",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.2/Add_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer1/layer1.2/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.2/Add_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer1/layer1.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.0/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_530",
+          "dim": [
+            128,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_531",
+          "dim": [
+            128
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.0/relu/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.0/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.0/relu/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_533",
+          "dim": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_534",
+          "dim": [
+            128
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.0/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.0/conv3/Conv",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.0/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_536",
+          "dim": [
+            512,
+            128,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_537",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.0/conv3/Conv_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.0/downsample/downsample.0/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer1/layer1.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            56,
+            56
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_539",
+          "dim": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_540",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.0/Add_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer2/layer2.0/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.0/Add_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.0/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.1/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.0/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_542",
+          "dim": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_543",
+          "dim": [
+            128
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.1/relu/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.1/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.1/relu/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_545",
+          "dim": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_546",
+          "dim": [
+            128
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.1/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.1/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.1/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_548",
+          "dim": [
+            512,
+            128,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_549",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.1/Add_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer2/layer2.1/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.1/Add_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.1/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.2/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.1/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_551",
+          "dim": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_552",
+          "dim": [
+            128
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.2/relu/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.2/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.2/relu/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_554",
+          "dim": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_555",
+          "dim": [
+            128
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.2/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.2/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.2/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_557",
+          "dim": [
+            512,
+            128,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_558",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.2/Add_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer2/layer2.2/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.2/Add_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.3/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_560",
+          "dim": [
+            128,
+            512,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_561",
+          "dim": [
+            128
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.3/relu/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.3/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.3/relu/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_563",
+          "dim": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_564",
+          "dim": [
+            128
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.3/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer2/layer2.3/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.3/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            128,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_566",
+          "dim": [
+            512,
+            128,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_567",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.3/Add_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer2/layer2.3/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.3/Add_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer2/layer2.3/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.0/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.3/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_569",
+          "dim": [
+            256,
+            512,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_570",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.0/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.0/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.0/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_572",
+          "dim": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_573",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.0/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.0/conv3/Conv",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.0/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_575",
+          "dim": [
+            1024,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_576",
+          "dim": [
+            1024
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.0/conv3/Conv_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.0/downsample/downsample.0/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer2/layer2.3/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            28,
+            28
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_578",
+          "dim": [
+            1024,
+            512,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_579",
+          "dim": [
+            1024
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.0/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer3/layer3.0/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.0/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.0/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.1/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.0/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_581",
+          "dim": [
+            256,
+            1024,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_582",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.1/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.1/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.1/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_584",
+          "dim": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_585",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.1/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.1/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.1/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_587",
+          "dim": [
+            1024,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_588",
+          "dim": [
+            1024
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.1/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer3/layer3.1/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.1/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.1/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.2/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.1/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_590",
+          "dim": [
+            256,
+            1024,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_591",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.2/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.2/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.2/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_593",
+          "dim": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_594",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.2/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.2/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.2/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_596",
+          "dim": [
+            1024,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_597",
+          "dim": [
+            1024
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.2/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer3/layer3.2/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.2/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.3/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_599",
+          "dim": [
+            256,
+            1024,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_600",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.3/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.3/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.3/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_602",
+          "dim": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_603",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.3/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.3/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.3/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_605",
+          "dim": [
+            1024,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_606",
+          "dim": [
+            1024
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.3/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer3/layer3.3/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.3/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.3/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.4/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.3/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_608",
+          "dim": [
+            256,
+            1024,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_609",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.4/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.4/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.4/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_611",
+          "dim": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_612",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.4/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.4/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.4/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_614",
+          "dim": [
+            1024,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_615",
+          "dim": [
+            1024
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.4/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer3/layer3.4/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.4/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.4/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.5/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.4/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_617",
+          "dim": [
+            256,
+            1024,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_618",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.5/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.5/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.5/relu/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_620",
+          "dim": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_621",
+          "dim": [
+            256
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.5/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer3/layer3.5/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.5/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            256,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_623",
+          "dim": [
+            1024,
+            256,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_624",
+          "dim": [
+            1024
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.5/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer3/layer3.5/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.5/Add_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer3/layer3.5/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.0/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.5/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_626",
+          "dim": [
+            512,
+            1024,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_627",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.0/relu/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.0/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.0/relu/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_629",
+          "dim": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_630",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.0/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.0/conv3/Conv",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.0/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_632",
+          "dim": [
+            2048,
+            512,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_633",
+          "dim": [
+            2048
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.0/conv3/Conv_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.0/downsample/downsample.0/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer3/layer3.5/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            1024,
+            14,
+            14
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_635",
+          "dim": [
+            2048,
+            1024,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_636",
+          "dim": [
+            2048
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.0/Add_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer4/layer4.0/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.0/Add_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.0/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.1/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.0/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_638",
+          "dim": [
+            512,
+            2048,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_639",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.1/relu/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.1/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.1/relu/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_641",
+          "dim": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_642",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.1/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.1/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.1/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_644",
+          "dim": [
+            2048,
+            512,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_645",
+          "dim": [
+            2048
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.1/Add_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer4/layer4.1/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.1/Add_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.1/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.2/conv1/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.1/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_647",
+          "dim": [
+            512,
+            2048,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_648",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.2/relu/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.2/conv2/Conv_fused_relu",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.2/relu/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_650",
+          "dim": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_651",
+          "dim": [
+            512
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.2/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.conv",
+      "name": "/layer4/layer4.2/conv3/Conv_fused_bias_fused_add",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.2/relu_1/Relu_output_0",
+          "dim": [
+            0,
+            512,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_653",
+          "dim": [
+            2048,
+            512,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "onnx::Conv_654",
+          "dim": [
+            2048
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.2/Add_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.relu",
+      "name": "/layer4/layer4.2/relu_2/Relu",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.2/Add_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/layer4/layer4.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.globalaveragepool",
+      "name": "/avgpool/GlobalAveragePool",
+      "inputs": [
+        {
+          "name": "/layer4/layer4.2/relu_2/Relu_output_0",
+          "dim": [
+            0,
+            2048,
+            7,
+            7
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/avgpool/GlobalAveragePool_output_0",
+          "dim": [
+            0,
+            2048,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.flatten",
+      "name": "/Flatten",
+      "inputs": [
+        {
+          "name": "/avgpool/GlobalAveragePool_output_0",
+          "dim": [
+            0,
+            2048,
+            1,
+            1
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "/Flatten_output_0",
+          "dim": [
+            0,
+            2048
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    },
+    {
+      "op_type": "qnn.csi.gemm",
+      "name": "/fc/Gemm",
+      "inputs": [
+        {
+          "name": "/Flatten_output_0",
+          "dim": [
+            0,
+            2048
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "fc.weight",
+          "dim": [
+            1000,
+            2048
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        },
+        {
+          "name": "fc.bias",
+          "dim": [
+            1000
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "logits",
+          "dim": [
+            0,
+            1000
+          ],
+          "is_const": 0,
+          "layout": "NCHW"
+        }
+      ],
+      "attrs": {}
+    }
+  ]
+}
