@@ -14,14 +14,14 @@ model.eval()  # 设置为评估模式
 dummy_input = torch.randn(1, 3, 224, 224)
 
 # Step 4: 设置导出路径
-onnx_output_path = os.path.join(onnx_dir, "resnet50.onnx")
+onnx_output_path = os.path.join(onnx_dir, "resnet50_export_params_no_constant_folding.onnx")
 
 # Step 5: 导出为 ONNX 模型
 torch.onnx.export(
     model,                         # PyTorch 模型
     dummy_input,                   # 示例输入
     onnx_output_path,              # 输出文件路径
-    export_params=False,            # 是否导出权重
+    export_params=True,            # 是否导出权重
     opset_version=11,              # ONNX opset 版本
     do_constant_folding=True,      # 是否执行常量折叠优化
     input_names=['data_input'],    # 输入名称
