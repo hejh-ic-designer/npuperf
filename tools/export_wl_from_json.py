@@ -25,7 +25,8 @@ mapping = MainStage([MappingGeneratorStage, Dummy], accelerator=accelerator).run
 #     'diffusion_text_encoder',
 #     'diffusion_vae_encoder',
 # ]
-nn_list = ['mv2', 'mv1', 'fcn8s', 'fsrcnn2x', 'resnet50', 'inceptionv1']
+# nn_list = ['mv2', 'mv1', 'fcn8s', 'fsrcnn2x', 'resnet50', 'inceptionv1']
+nn_list = ['bert_small']
 
 if __name__ == '__main__':
     for nn in nn_list:

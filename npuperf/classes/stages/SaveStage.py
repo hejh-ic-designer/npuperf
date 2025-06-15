@@ -58,6 +58,8 @@ class CompleteSaveStage(Stage):
             return list(obj)
         if isinstance(obj, np.int32):
             return int(obj)
+        if isinstance(obj, np.uint64):
+            return int(obj)
         if hasattr(obj, "__jsonrepr__"):
             return obj.__jsonrepr__()
         else:
