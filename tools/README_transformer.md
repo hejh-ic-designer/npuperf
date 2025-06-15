@@ -12,7 +12,7 @@
 
 6. 使用的顶层脚本(使用自定义架构)：[/tools/main_dse.py](/tools/main_dse.py)
    1. 自定义架构需要在[/npuperf/inputs/hw_config/](/npuperf/inputs/hw_config/)下创建一个配置文件，文件名应为架构名称
-   2. 关于接口的更多信息见：https://aliyuque.antfin.com/cbi1qi/gqqch3/ui1b1v5gwl73phw6#bBcZN
+   2. 关于接口的更多信息见：[接口](/tools/README_tools.md#输入接口)
 
 
 运行顶层脚本，在控制台输入：
