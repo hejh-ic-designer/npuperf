@@ -14,6 +14,7 @@ class SpatialMapping:
 
     def __init__(self, spatial_mapping_dict: Dict, layer_node: 'LayerNode'):
         self.mapping_dict_origin = spatial_mapping_dict
+        # pr 解耦，将OX FX和OY FY中的OX OY解耦成r部分和ir部分
         self.mapping_dict_reform = mapping_assist_funcs.decouple_pr_loop(spatial_mapping_dict, layer_node)
         self.layer_node = layer_node
         self.operand_list = layer_node.operand_list
@@ -193,15 +194,15 @@ if __name__ == "__main__":
     #                        'O': [[('C', 2)], [('B', 14), ('K', 8)], []]}
 
     # mapping case 3 for debug
-    # spatial_mapping_dic = {'W': [[('OX', 14), ('OY', 7)], [('FX', 3)], [], []],
-    #                        'I': [[], [('OX', 14), ('FX', 3)], [('OY', 7)], []],
-    #                        'O': [[('FX', 3)], [('OX', 14), ('OY', 7)], []]}
+    spatial_mapping_dic = {'W': [[('OX', 14), ('OY', 7)], [('FX', 3)], [], []],
+                           'I': [[], [('OX', 14), ('FX', 3)], [('OY', 7)], []],
+                           'O': [[('FX', 3)], [('OX', 14), ('OY', 7)], []]}
     
-    spatial_mapping_dic = {
-        'O': [[('C', 2.0)], [('K', 32.0), ('OY', 4.0), ('OX', 4.0)], [], [], []],
-        'W': [[('OY', 4.0), ('OX', 4.0)], [('K', 32.0), ('C', 2.0)], [], [], []],
-        'I': [[('K', 32.0), ('OY', 4.0), ('OX', 4.0), ('C', 2.0)], [], [], []]
-    }
+    # spatial_mapping_dic = {
+    #     'O': [[('C', 2.0)], [('K', 32.0), ('OY', 4.0), ('OX', 4.0)], [], [], []],
+    #     'W': [[('OY', 4.0), ('OX', 4.0)], [('K', 32.0), ('C', 2.0)], [], [], []],
+    #     'I': [[('K', 32.0), ('OY', 4.0), ('OX', 4.0), ('C', 2.0)], [], [], []]
+    # }
     spatial_mapping = SpatialMapping(spatial_mapping_dic, layer_node)
     print(spatial_mapping.mapping_dict_reform)
     # print result：

@@ -11,6 +11,7 @@ class Parser:
     :attrs_di: attrs dict for json NN layer
     :outputs_li: output list for json NN layer
     """
+    #这个映射都是相对输出而言，C其实是OC，如何映射看extract_tensor_size
     DIM_LINK = {
         'N': 'b',
         'C': 'g',
@@ -131,7 +132,8 @@ class Parser:
         """
 
         assert weight_di['is_const'], f'Not weight dict! please check your equation configuration, {weight_di}'
-        assert operation in ['+', '*'], f'Unexpected operation: {operation}'
+        # by gyp 一开始不支持减法，加进入了，原始：['+', '*']
+        assert operation in ['+', '*', '-'], f'Unexpected operation: {operation}'
 
         eff_w_str = Parser._gen_effective_dim_str(weight_di)
         if eff_w_str:

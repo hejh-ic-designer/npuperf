@@ -90,7 +90,7 @@ class Json2WorkloadParser:
         self.workload_file[-1] = input_layer_dict
     
     def parse_input_layer(self):
-
+        # 解析输入层，会拿着json开头的输入层信息，生成一个-3，-2，-1层的输入字段，其实就是模仿没有parse的模式
         def gen_loop_dim_size(input_di: dict):
             assert not input_di['is_const'], f'input dict is not a feature map! {input_di}'
             return {(Parser.DIM_LINK[that_format]).upper(): dim for that_format, dim in zip(list(input_di['layout']), input_di['dim'])}
@@ -158,6 +158,7 @@ class Json2WorkloadParser:
                 being_del.add(op_type)
                 self.workload_file[id - 1]['activation_function'] = 'prelu'
             else:
+                # O(C=1)HW,将一个多通道的输入转换为多个单通道的输入
                 if op_type == "qnn.csi.conv2d" and layer["inputs"][1]["layout"] == "O1HW":
                     parser = dwConvParser(layer, self.mapping)
                 elif op_type == "qnn.csi.deconv2d":
@@ -172,7 +173,7 @@ class Json2WorkloadParser:
                 elif op_type == "qnn.csi.subtract":
                     parser = SubtractParser(layer, self.mapping)
                 elif op_type == "qnn.csi.mul":
-                    parser = MulParser(layer, self.mapping)
+                    parser = MulParser(layer, self.mapping) #看起来是两个向量相同位置乘法计算
                 elif op_type == "qnn.csi.dense":
                     parser = DenseParser(layer, self.mapping)
                 elif op_type == "qnn.csi.matmul":

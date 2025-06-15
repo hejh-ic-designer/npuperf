@@ -82,7 +82,8 @@ class SubtractParser(Parser):
         IFM_name = [ifm['name'] for ifm in self.inputs_li if ifm['is_const'] == 0]
 
         ### 目前遇到的 subtract 都是两特征输入，不清楚是否存在 权重输入 的情况，所以先添加这一行 assert 代码
-        assert len(IFM_name) == 2, f'The IFMs of Subtract layer is not 2!, please check {self.layer["name"]}'
+        # by gyp
+        #assert len(IFM_name) == 2, f'The IFMs of Subtract layer is not 2!, please check {self.layer["name"]}'
         ### 如果出现 权重输入 的情况，删去这行即可
 
         if len(IFM_name) == 2:
@@ -98,7 +99,9 @@ class SubtractParser(Parser):
             d['memory_operand_links'] = self.mapping['memory_operand_links']['OXY']
 
         elif len(IFM_name) == 1:  # 权重的数据量可能和tensor不等，这里的情况较复杂，要解析权重的layout 和dim，然后去配置对应的equation
-            d['equation'] = Parser.get_equation_WIO(self.inputs_li[1], '-', self.inputs_li[0])
+            # by gyp 这里会报错，因为get_equation_WIO 第一个输入需要常量weights，但这里input_list索引为0的是weight常量
+            # d['equation'] = Parser.get_equation_WIO(self.inputs_li[1], '-', self.inputs_li[0])
+            d['equation'] = Parser.get_equation_WIO(self.inputs_li[0], '-', self.inputs_li[1])
             d['operand_source'] = {'I': IFM_name, 'W': []}
             d['constant_operands'] = ['W']
             d['operand_precision'] = {

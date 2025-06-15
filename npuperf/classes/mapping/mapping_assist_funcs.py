@@ -32,16 +32,16 @@ def decouple_pr_loop(mapping_dict: Dict, layer_node: 'LayerNode'):
     This function decouples the pr loops into data size (r loops) and data reuse (ir loops).
     It also provides a transferred mapping dictionary in which the pr loops are replaced by r and ir loops.
     """
-
+    # 其实这里都是固定的，因为只有I有pr型依赖关系
     operand_loop_dim = layer_node.operand_loop_dim
     r_ir_operand_loop_LUT = {op: relevance['r'] + relevance['ir'] for (op, relevance) in operand_loop_dim.items()}
     pr_operand_loop_LUT = {op: relevance['pr'] for (op, relevance) in operand_loop_dim.items() if relevance['pr'] != {}}
     pr_operand_list = list(pr_operand_loop_LUT.keys())
     mapping_dict_reform = pickle_deepcopy(mapping_dict)
     ''' current and below level pr data size '''
-    cabl_pr_data_size = {}
+    cabl_pr_data_size = {} #对应分裂出来的r的部分
     ''' current and below level pr data reuse '''
-    cabl_pr_data_reuse = {}
+    cabl_pr_data_reuse = {} #对应分裂出来的ir的部分
     ''' each single pr loop data size '''
     per_pr_data_size = {}
     ''' each single pr loop data reuse '''
@@ -55,37 +55,43 @@ def decouple_pr_loop(mapping_dict: Dict, layer_node: 'LayerNode'):
                 for pr_loop_dim in pr_operand_loop_LUT[operand][pr_data_dim]
             }
             for pr_data_dim in pr_operand_loop_LUT[operand].keys()
-        }
+        } # cabl_pr_lp_size = {'IX': {'OX': 1, 'FX': 1}, 'IY': {'OY': 1, 'FY': 1}}
         ''' initialize current and below level pr data size '''
         cabl_pr_data_size[operand] = {
-            pr_data_dim: [[] for _ in range(len(mapping_dict[operand]))]
+            pr_data_dim: [[] for _ in range(len(mapping_dict[operand]))] # mapping_dict[operand]是每个操作数在上一步依次填充进内存层次结构的信息，这里其实就是操作数I的内存层级
             for pr_data_dim in pr_operand_loop_LUT[operand].keys()
-        }
+        } # cabl_pr_data_size = {'I' : {'IX': [[], [], []], 'IY': [[], [], []]}}
         ''' initialize current and below level pr data reuse '''
         cabl_pr_data_reuse[operand] = {
             pr_data_dim: [[] for _ in range(len(mapping_dict[operand]))]
             for pr_data_dim in pr_operand_loop_LUT[operand].keys()
-        }
+        } # cabl_pr_data_reuse = {'I' : {'IX': [[], [], []], 'IY': [[], [], []]}}
         ''' initialize per pr loop data size '''
         per_pr_data_size[operand] = {
             pr_data_dim: [[] for _ in range(len(mapping_dict[operand]))]
             for pr_data_dim in pr_operand_loop_LUT[operand].keys()
-        }
+        } # per_pr_data_size = {'I' : {'IX': [[], [], []], 'IY': [[], [], []]}}
         ''' initialize per pr loop data reuse '''
         per_pr_data_reuse[operand] = {
             pr_data_dim: [[] for _ in range(len(mapping_dict[operand]))]
             for pr_data_dim in pr_operand_loop_LUT[operand].keys()
-        }
+        } # per_pr_data_reuse = {'I' : {'IX': [[], [], []], 'IY': [[], [], []]}}
         ''' update the cabl_pr_lp_size by multiply pr loop size across architectural level '''
+        # 找I的每个内存层级
         for level, loop_list in enumerate(mapping_dict[operand]):
+            # 遍历每个内存层级的loop    
             for loop_type, loop_size in loop_list:
+                # 如果是r或ir loop，则跳过
                 if loop_type in r_ir_operand_loop_LUT[operand]:
                     continue
+                # 七个维度里没有IX IY只有OX OY，loop_type只可能是OX或OY，直接遍历pr_operand_loop_LUT里的IX IY,pr_data_dim只能是IX IY
                 for pr_data_dim in pr_operand_loop_LUT[operand].keys():
+                    # 去找一找当前loop_type是否在pr_operand_loop_LUT[operand][pr_data_dim]中（OY FY）还是（OX FX）反正就一个
                     if any(lp_type == loop_type for lp_type in pr_operand_loop_LUT[operand][pr_data_dim]):
                         cabl_pr_lp_size[pr_data_dim][loop_type] *= loop_size
                         ''' compute pr related data dimension size and data dimension reuse at current and below joint levels
                         based on pr_funcs (dynamic functions extracted in LayerNode). Each pr loop is decoupled into r and ir loops. '''
+                        # 找到最小的IX或IY的大小，因为有pr复用，r相关的维度变小了，出来了一些可以复用的ir部分
                         pr_loop_combined_to_r = layer_node.calc_tensor_dim_fraction(operand, cabl_pr_lp_size[pr_data_dim], pr_data_dim)
                         pr_loop_combined_to_ir = prod(cabl_pr_lp_size[pr_data_dim].values()) / pr_loop_combined_to_r
                         cabl_pr_data_size[operand][pr_data_dim][level].append(pr_loop_combined_to_r)
@@ -97,13 +103,14 @@ def decouple_pr_loop(mapping_dict: Dict, layer_node: 'LayerNode'):
             data_reuse_list = cabl_pr_data_reuse[operand][pr_data_dim]
             previous_data_size = 1
             previous_data_data_reuse = 1
+            # 算出来r 和 ir的大小是不准确的，上一级的reuse大小要除下一级的reuse大小，才是真正的reuse大小
             for level, va_list in enumerate(data_size_list):
                 for idx in range(len(va_list)):
                     per_pr_data_size[operand][pr_data_dim][level].append(data_size_list[level][idx] / previous_data_size)
                     per_pr_data_reuse[operand][pr_data_dim][level].append(data_reuse_list[level][idx] / previous_data_data_reuse)
                     previous_data_size = data_size_list[level][idx]
                     previous_data_data_reuse = data_reuse_list[level][idx]
-
+        # 最后真正用到的就是 per_pr_data_size 和 per_pr_data_reuse，在replace_pr_loop_in_mapping函数中将现有的mapping_dict[operand]中的pr loop根据r ir分裂结果替换为r和ir loop
         mapping_dict_reform[operand] = replace_pr_loop_in_mapping(mapping_dict[operand], per_pr_data_size[operand], per_pr_data_reuse[operand],
                                                                   pr_operand_loop_LUT[operand], r_ir_operand_loop_LUT[operand])
 

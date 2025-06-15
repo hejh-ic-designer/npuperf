@@ -144,10 +144,10 @@ Perf tool 对不同的算子类型有不同的建模方式：
     - Relu
     - PRelu
     - LeakeyRelu
-4. 被认为没有加速空间，不会去建模的算子
+4. 被认为没有加速空间，不会去建模的算子(by:gyp 其实这个有待商榷，受带宽能力影响，多数属于memory bound)
     - Reshape
     - LRN
-    - Softmax
+    - Softmax(比如这就是一个带宽受限的算子)
     - ...
 
 #### Manual layer definition

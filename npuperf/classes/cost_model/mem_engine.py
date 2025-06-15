@@ -55,6 +55,9 @@ class MemoryOperatorEvaluation:
         elif isinstance(self.layer, MemNode):
             self.energy_total = 0
             self.latency_total2 = 0
+            # 从 DRAM 到次最高级别的内存搬数据
+            # 这里的 data source 和 data destination 是手动指定的，代码中是从 DRAM 搬到 O 的次最高级别内存
+            # 然后再从 O 的次最高级别内存搬回DRAM
 
             d_src_mem = self.mem_hierarchy_dict['I1'][-1]
             d_src_str = 'I1'

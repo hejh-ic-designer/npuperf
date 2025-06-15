@@ -47,6 +47,7 @@ class MemoryAllocator:
         self.precision["O_final"] = self.layer.operand_precision.get("O_final", self.precision['O'])  # Final output precision
         # Initialize the unallocated loops with the ordering for each operand
         self.unallocated = {}
+        # 先给I1I2O三个操作数的unallocated都赋值为ordering
         for mem_op in self.mem_ops:
             self.unallocated[mem_op] = [Loop(dim, size) for (dim, size) in self.ordering]
 
@@ -107,11 +108,13 @@ class MemoryAllocator:
         # For all the mem_ops, find the max amount of unallocated loops we could allocate
         all_sizes = {}
         for mem_op in mem_ops:
+            # sizes中idx 0 是不分配任何时间循环的情况，idx 1 是分配一个时间循环的情况，idx 2 是分配两个时间循环的情况，依次类推，假设出来四个结果，其实是加了3个时间循环
             sizes = self.calc_size_slices(mem_op, mem_capacity)
             all_sizes[mem_op] = sizes
 
         # Now that we have this for all the mem_ops, call function that finds the best
         # combination of loops to minimize the number of accesses to the level above
+        # 一开始是对单一操作数计算，每个操作数都把这块内存填满，但是具体每个操作数各自应该保留到哪个循环，这个靠下面这个函数for循环遍历暴力算出最优解
         best_loop_idxs = self.find_best_loop_combination(mem_ops, all_sizes, node, top_levels)
 
         for (best_loop_idx, mem_op) in zip(best_loop_idxs, mem_ops):
@@ -157,7 +160,7 @@ class MemoryAllocator:
         # Unallocated loops for this mem_op
         unallocated_loops = self.unallocated[mem_op]
         sizes = []
-
+        # 每次循环都会计算新加入一个时间循环的size，第一个循环其实只是spatialmapping的size，之后每个循环加一个temporalmapping的size，直到容量超了进else
         for i in range(len(unallocated_loops) + 1):  # Go through all slices (includes empty slice)
             unallocated_slice = unallocated_loops[:i]  # Grab a slice of the unallocated loops
             loops = allocated_loops + unallocated_slice  # Join them with already allocated loops
@@ -252,6 +255,7 @@ class MemoryAllocator:
         best_loop_idxs = [0 for mem_op in mem_ops]
         best_accesses = np.inf
         nb_combinations = prod(len(sizes) for sizes in all_sizes.values())
+        # 一开始是对单一操作数计算，每个操作数都把这块内存填满，但是具体每个操作数保留多少，这个靠for循环遍历暴力算出最优解
         for i in range(nb_combinations):
             size_comb = 0
             accesses_comb = 0

@@ -36,17 +36,17 @@ args = parser.parse_args()
 experiment_id = f"{args.hw}--{args.nn}--{args.flow}" if args.flow else f"{args.hw}--{args.nn}"
 
 StagesPipeline = [
-    HardwareModifierStage,
-    MappingGeneratorStage,
-    JsonWorkloadParserStage,
-    WorkloadParserStage,
-    SumAndSaveAllLayersStage,
-    PickleSaveStage,
-    CompleteSaveStage,
+    HardwareModifierStage, # 解析硬件py
+    MappingGeneratorStage, # 解析各个算子的mapping信息，每个算子在硬件上的mapping方式都是固定死的
+    JsonWorkloadParserStage, # 解析工作负载json文件，生成NPUPerf能识别的对象，其实这里相当于从外部到NPUPerf内部的转换接口
+    WorkloadParserStage, # 解析工作负载，生成NPUPerfWorkload对象，包括pr ir r的处理都在这里
+    SumAndSaveAllLayersStage, #这个负责存整个计算结果（总体的），按理说应该有很多个list组成，但实际上好像只有一个all_layer，应该是在下游stage做了处理(MinimalLatencyStage只挑了一个最小延时的结果) 
+    PickleSaveStage, # 将结果pickle化保存，我没看出来和上一个stage保存内容的区别
+    CompleteSaveStage, #还是做保存，不确定是否保存单层
     # SimpleSaveStage,
     PlotTemporalMappingsStage,
-    WorkloadStage,
-    SpatialMappingConversionStage,
+    WorkloadStage, #可以只执行其中的几层，会对两个输入操作数的硬件和workload做处理，修改加速器内存结构,直接删除I2，复制一份I1作为I2
+    SpatialMappingConversionStage, # 生成一个spatial mapping对象，包含了每个算子在硬件上的空间映射信息,在对象初始化时，已经把OX和OY的pr部分进行解耦
     MinimalLatencyStage,
     LomaStage,
     ZigZagCostModelStage

@@ -15,7 +15,7 @@ _logging.basicConfig(
 logger = _logging.getLogger(__name__)
 
 #! here to setting DLA path
-accelerator_path='npuperf.inputs.HW.Meta_prototype'
+accelerator_path='npuperf.inputs.HW.Meta_prototype_3ddram'
 hw_name = accelerator_path.split('.')[-1]
 
 #! here to setting WL path

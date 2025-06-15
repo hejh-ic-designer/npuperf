@@ -99,16 +99,19 @@ class SpatialMappingConversionStage(Stage):
         mem_to_layer_op = {mem_op: layer_op for (layer_op, mem_op) in layer_to_mem_op.items()}
         core_id = self.layer.core_allocation
         mem_hierarchy = self.accelerator.get_core(core_id).memory_hierarchy
+        # 其实这个复杂的循环是为了将用户定义的空间映射，从下向上铺在内存层级上，必须注意第一项是MAC阵列的mapping维度，后面才是reg或生sram的空间mapping，完全没考虑容量问题，只考虑服务维度问题
         for mem_op, layer_op in mem_to_layer_op.items():  #mem_hierarchy.operands:
+            # 遍历一个layer中需要的三个操作数，I1, I2, O
             user_sm_copy = user_spatial_mapping.copy()
             # layer_op = mem_to_layer_op[mem_op]
             spatial_mapping_dict[layer_op] = []
-            memory_levels = mem_hierarchy.get_memory_levels(mem_op, )
-
+            memory_levels = mem_hierarchy.get_memory_levels(mem_op, ) #拿到这个mem_op的全部内存level
+            # 遍历当前操作数所在的每一个memory level
             for memory_level in memory_levels:
                 spatial_mapping_lvl = []
                 served_dimensions = memory_level.served_dimensions
                 for dimension in served_dimensions:
+                    #遍历当前memory level的每一个服务维度，看是否在用户定义的空间映射中
                     dim_name = dimension.name
                     if dim_name in user_sm_copy:
                         # The dimension name is present in the user defined spatial mapping
@@ -123,6 +126,7 @@ class SpatialMappingConversionStage(Stage):
             # After we have gone through the memory levels, if there are still user-defined dimensions
             # present, add them as the top level. Otherwise add an empty list to make arch levels correct:
             # because first list we added was the operational array level.
+            # 如果用户定义的空间映射中还有剩余的维度没有被添加到空间映射中，直接加在顶层，一般都是没有，直接加一个空[]
             top_level_spatial_mapping = [spatial_loop for (dim_name, spatial_loop) in user_sm_copy.items()]
             spatial_mapping_dict[layer_op].append(top_level_spatial_mapping)
 

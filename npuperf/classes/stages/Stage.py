@@ -62,6 +62,10 @@ class MainStage:
         有的stage在cme的位置可能是所有cme 的sum, 或者其他的cme 相关的对象, 这导致这里return 的值取决于
         stage pipeline之间的配合和各自的操作, 实际上是不可控的
         """
+        """
+        by gyp
+        cme cost model evaluation
+        """
         answers = []
         substage = self.list_of_callables[0](self.list_of_callables[1:], **self.kwargs)
         for cme, extra_info in substage.run():

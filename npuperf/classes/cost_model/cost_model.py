@@ -1339,6 +1339,17 @@ if __name__ == "__main__":
     #                 'core_allocation': 1,
     #                 'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'}
     #                 }, }
+    # 0: {   'operator_type': 'Conv',
+    #    'equation': 'O[b][k][oy][ox]+=W[k][c][fy][fx]*I[b][c][ix][iy]',
+    #    'equation_relations': ['ix=2*ox+1*fx', 'iy=2*oy+1*fy'],
+    #    'loop_dim_size': {'B': 1, 'K': 32, 'C': 3, 'OY': 112, 'OX': 112, 'FY': 3, 'FX': 3},
+    #    'operand_precision': {'O': 16, 'O_final': 8, 'W': 8, 'I': 8},
+    #    'operand_source': {'W': [], 'I': [-1]},
+    #    'constant_operands': ['W'],
+    #    'core_allocation': 1,
+    #    'spatial_mapping': {'D1': ('K', 32), 'D2': ('C', 2), 'D3': ('OX', 4), 'D4': ('OY', 4)},
+    #    'memory_operand_links': {'O': 'O', 'W': 'I2', 'I': 'I1'},
+    #    'name': 'conv2d_conv1_0_fuse_multiply_1_fuse_add_conv1/bn_PART_0_2'},
     layer_node = LayerNode(0, workload[0])
 
     # spatial_mapping_dic = {'W': [[], [('K', 16), ('OX', 16)], [], []],

@@ -112,6 +112,7 @@ class LayerNode:
         pr_loop, pr_loop_list, equation = self.build_pr_funcs()
         # pr_loop:      {'IX': ['OX', 'FX'], 'IY': ['OY', 'FY']}    卷积的情况
         # pr_loop_list: ['IX', 'OX', 'FX', 'IY', 'OY', 'FY']
+        #pr_scaling_factors：每个维度的缩放因子，例如 {'IX': {'ox': 2, 'fx': 1}, 'IY': {'oy': 2, 'fy': 1}}
         ''' Step2: extract relevant and irrelevant loop dimensions. '''
         operand_loop_dim, operand_loop_dim_reform, operand_list = \
             self.extract_r_ir_loop_info(equation, self.loop_dim_size, pr_loop, pr_loop_list)

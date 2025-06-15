@@ -60,12 +60,16 @@ class TemporalMapping:
         while not done:
             mapping_st = {op: [[] for _ in range(self.mem_level[op])] for op in self.operand_list}
             MAC_level_st = {op: 1 for op in self.operand_list}
+            # 遍历每个操作数
             for operand in self.mem_level.keys():
+                # 遍历操作数的每个时间映射层级
                 for level, current_level_loops in enumerate(mapping_previous[operand]):
                     if not current_level_loops:
                         mapping_st[operand][level] = pickle_deepcopy(current_level_loops)
                     else:
+                        # 遍历里面的(OY,2) (OX,3)等
                         for loop_type, loop_dim in current_level_loops:
+                            # 如果是ir的tempral loop, 则将其合并到上一级
                             if loop_type in self.layer_node.operand_loop_dim[operand]['ir']:
                                 if level == 0:
                                     MAC_level_st[operand] *= loop_dim

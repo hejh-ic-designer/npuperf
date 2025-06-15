@@ -48,7 +48,7 @@ class ListElement:
         return o
 
 def init(multiset):
-    multiset.sort() # ensures proper non-increasing order
+    multiset.sort() # ensures proper non-increasing order # by gyp 这里是升序，不是non-increasing order, 后面他会用自己的ListElement格式转变为升序
     h = ListElement(multiset[0], None)
     for item in multiset[1:]:
         h = ListElement(item, h)
