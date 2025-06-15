@@ -26,7 +26,7 @@ def visualize_dnn_graph(G):
     nx.draw_networkx_labels(G, pos=pos, font_color='red')
     plt.box(False)
     fig.tight_layout()
-    # plt.show()
+    plt.show()
     # 临时打印一下mv1的DNN图
-    plt.savefig("dnn_mv1.png")
+    # plt.savefig("dnn_mv1.png")
 
