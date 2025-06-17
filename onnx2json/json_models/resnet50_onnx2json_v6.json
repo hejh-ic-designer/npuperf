@@ -7,20 +7,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
+          2,
+          2
+        ],
+        "groups": 1,
+        "dilation": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "padding": [
           3,
           3,
           3,
           3
-        ],
-        "strides": [
-          2,
-          2
         ],
         "kernel_size": [
           7,
@@ -113,23 +113,24 @@
       "name": "/maxpool/MaxPool",
       "attrs": {
         "ceil_mode": 0,
-        "dilations": [
-          1,
-          1
-        ],
-        "kernel_shape": [
-          3,
-          3
-        ],
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
           2,
           2
+        ],
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "layout": "NCHW",
+        "pool_size": [
+          3,
+          3
         ]
       },
       "inputs": [
@@ -163,20 +164,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.0/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -268,18 +269,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.0/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -373,20 +374,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.0/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -447,20 +448,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.0/downsample/downsample.0/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -594,20 +595,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.1/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -699,18 +700,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.1/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -804,20 +805,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.1/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -951,20 +952,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.2/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -1056,18 +1057,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.2/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -1161,20 +1162,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer1/layer1.2/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -1308,20 +1309,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.0/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -1413,20 +1414,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.0/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
           2,
           2
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
+          1,
+          1
         ],
         "kernel_size": [
           3,
@@ -1518,20 +1519,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.0/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -1592,20 +1593,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.0/downsample/downsample.0/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
+          2,
+          2
+        ],
+        "groups": 1,
+        "dilation": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          2,
-          2
         ],
         "kernel_size": [
           1,
@@ -1739,20 +1740,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.1/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -1844,18 +1845,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.1/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -1949,20 +1950,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.1/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -2096,20 +2097,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.2/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -2201,18 +2202,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.2/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -2306,20 +2307,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.2/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -2453,20 +2454,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.3/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -2558,18 +2559,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.3/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -2663,20 +2664,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer2/layer2.3/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -2810,20 +2811,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.0/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -2915,20 +2916,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.0/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
           2,
           2
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
+          1,
+          1
         ],
         "kernel_size": [
           3,
@@ -3020,20 +3021,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.0/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -3094,20 +3095,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.0/downsample/downsample.0/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
+          2,
+          2
+        ],
+        "groups": 1,
+        "dilation": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          2,
-          2
         ],
         "kernel_size": [
           1,
@@ -3241,20 +3242,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.1/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -3346,18 +3347,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.1/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -3451,20 +3452,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.1/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -3598,20 +3599,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.2/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -3703,18 +3704,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.2/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -3808,20 +3809,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.2/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -3955,20 +3956,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.3/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -4060,18 +4061,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.3/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -4165,20 +4166,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.3/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -4312,20 +4313,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.4/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -4417,18 +4418,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.4/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -4522,20 +4523,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.4/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -4669,20 +4670,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.5/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -4774,18 +4775,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.5/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -4879,20 +4880,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer3/layer3.5/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -5026,20 +5027,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.0/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -5131,20 +5132,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.0/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
           2,
           2
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
+          1,
+          1
         ],
         "kernel_size": [
           3,
@@ -5236,20 +5237,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.0/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -5310,20 +5311,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.0/downsample/downsample.0/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
+          2,
+          2
+        ],
+        "groups": 1,
+        "dilation": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          2,
-          2
         ],
         "kernel_size": [
           1,
@@ -5457,20 +5458,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.1/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -5562,18 +5563,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.1/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -5667,20 +5668,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.1/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -5814,20 +5815,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.2/conv1/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -5919,18 +5920,18 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.2/conv2/Conv",
       "attrs": {
-        "dilations": [
-          1,
-          1
-        ],
-        "group": 1,
-        "pads": [
-          1,
-          1,
-          1,
-          1
-        ],
         "strides": [
+          1,
+          1
+        ],
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
+          1,
+          1,
           1,
           1
         ],
@@ -6024,20 +6025,20 @@
       "op_type": "qnn.csi.conv2d",
       "name": "/layer4/layer4.2/conv3/Conv",
       "attrs": {
-        "dilations": [
+        "strides": [
           1,
           1
         ],
-        "group": 1,
-        "pads": [
+        "groups": 1,
+        "dilation": [
+          1,
+          1
+        ],
+        "padding": [
           0,
           0,
           0,
           0
-        ],
-        "strides": [
-          1,
-          1
         ],
         "kernel_size": [
           1,
@@ -6170,7 +6171,13 @@
     {
       "op_type": "qnn.csi.global_avgpool2d",
       "name": "/avgpool/GlobalAveragePool",
-      "attrs": {},
+      "attrs": {
+        "layout": "NCHW",
+        "dilation": [
+          1,
+          1
+        ]
+      },
       "inputs": [
         {
           "name": "/layer4/layer4.2/relu_2/Relu_output_0",

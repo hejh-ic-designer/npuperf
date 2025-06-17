@@ -20,9 +20,9 @@ class ONNX2JSONConverter:
             "Conv": "qnn.csi.conv2d",
             "ConvTranspose": "qnn.csi.deconv2d",
             "AveragePool": "qnn.csi.avgpool2d",
+            "MaxPool": "qnn.csi.maxpool2d",
             "GlobalAveragePool": "qnn.csi.global_avgpool2d",
             "GlobalMaxPool": "qnn.csi.global_maxpool2d",
-            "MaxPool": "qnn.csi.maxpool2d",
             "Add": "qnn.csi.add",
             "Sub": "qnn.csi.subtract",
             "Mul": "qnn.csi.mul",
@@ -158,8 +158,16 @@ class ONNX2JSONConverter:
                 elif attr.type == onnx.AttributeProto.STRING:
                     attrs[attr.name] = attr.s.decode("utf-8")
 
+            # ✅ 标准化命名：将 "group" → "groups"，"dilations" → "dilation", "pads" → "padding"
+            if "group" in attrs:
+                attrs["groups"] = attrs.pop("group")
+            if "dilations" in attrs:
+                attrs["dilation"] = attrs.pop("dilations")
+            if "pads" in attrs:
+                attrs["padding"] = attrs.pop("pads")
+
             # 如果是 Conv 算子则进一步补充属性
-            if op == "Conv":
+            if op_type_norm in ("qnn.csi.conv2d", "qnn.csi.deconv2d"):
                 if "kernel_shape" in attrs:
                     attrs["kernel_size"] = attrs.pop("kernel_shape")
                 if len(node.input) >= 2:
@@ -171,6 +179,15 @@ class ONNX2JSONConverter:
                 attrs["kernel_layout"] = "OIHW"
                 attrs["data_layout"] = "NCHW"
                 attrs["out_layout"] = ""
+
+            # ✅ Pool 属性补充
+            if op_type_norm in ("qnn.csi.avgpool2d", "qnn.csi.maxpool2d", "qnn.csi.global_avgpool2d", "qnn.csi.global_maxpool2d"):
+                attrs["layout"] = "NCHW"
+                attrs["dilation"] = [1, 1]
+                if "kernel_shape" in attrs:
+                    attrs["pool_size"] = attrs.pop("kernel_shape")
+                if "pads" in attrs:
+                    attrs["padding"] = attrs.pop("pads")
 
             layer["attrs"] = attrs
 

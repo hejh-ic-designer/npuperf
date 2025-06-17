@@ -52,12 +52,23 @@ class CompleteSaveStage(Stage):
         with open(filename, "w") as fp:
             json.dump(obj, fp, default=self.complexHandler, indent=4)
 
+    # @staticmethod
+    # def complexHandler(obj):
+    #     if isinstance(obj, set):
+    #         return list(obj)
+    #     if isinstance(obj, np.int32): # Czy: 当前 complexHandler 方法只处理了 np.int32，但很多 ONNX/PyTorch 转换生成的值可能是 np.uint64 或其他 numpy 类型。
+    #         return int(obj) # Czy: 此修改将修复 main_LBL_json.py 中运行 .run() 时出现的所有 numpy 类型不能被 JSON 序列化的问题
+    #     if hasattr(obj, "__jsonrepr__"):
+    #         return obj.__jsonrepr__()
+    #     else:
+    #         raise TypeError(f"Object of type {type(obj)} is not serializable. Create a __jsonrepr__ method.")
+
     @staticmethod
     def complexHandler(obj):
         if isinstance(obj, set):
             return list(obj)
-        if isinstance(obj, np.int32):
-            return int(obj)
+        if isinstance(obj, (np.integer, np.floating, np.bool_)): # Czy: np.integer 会匹配所有 numpy 整数类型，包括 np.uint64, np.int64, np.uint32 等。
+            return obj.item() # Czy: .item() 方法会将 numpy 类型转换为 Python 原生类型（int、float、bool），从而让 json.dump() 可以正常序列化。
         if hasattr(obj, "__jsonrepr__"):
             return obj.__jsonrepr__()
         else:
@@ -217,12 +228,23 @@ class SumAndSaveAllLayersStage(Stage):
         with open(filename, "w") as fp:
             json.dump(obj, fp, default=self.complexHandler, indent=4)
 
+    # @staticmethod
+    # def complexHandler(obj):
+    #     if isinstance(obj, set):
+    #         return list(obj)
+    #     if isinstance(obj, np.int32): # Czy: 当前 complexHandler 方法只处理了 np.int32，但很多 ONNX/PyTorch 转换生成的值可能是 np.uint64 或其他 numpy 类型。
+    #         return int(obj) # Czy:此修改将修复 main_LBL_json.py 中运行 .run() 时出现的所有 numpy 类型不能被 JSON 序列化的问题
+    #     if hasattr(obj, "__simplejsonrepr__"):
+    #         return obj.__simplejsonrepr__()
+    #     else:
+    #         raise TypeError(f"Object of type {type(obj)} is not serializable. Create a __simplejsonrepr__ method.")
+
     @staticmethod
     def complexHandler(obj):
         if isinstance(obj, set):
             return list(obj)
-        if isinstance(obj, np.int32):
-            return int(obj)
+        if isinstance(obj, (np.integer, np.floating, np.bool_)): # Czy: np.integer 会匹配所有 numpy 整数类型，包括 np.uint64, np.int64, np.uint32 等。
+            return obj.item() # Czy: .item() 方法会将 numpy 类型转换为 Python 原生类型（int、float、bool），从而让 json.dump() 可以正常序列化。
         if hasattr(obj, "__simplejsonrepr__"):
             return obj.__simplejsonrepr__()
         else:
