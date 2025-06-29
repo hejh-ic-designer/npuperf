@@ -11,6 +11,9 @@ output*/*.pkl
 output*/*.pickle
 outputs*/*.json
 outputs*/*.png
+json_models*/*.json
+onnx_models*/*.onnx
+
 
 # 忽略生成的临时目录及其内容
 __pycache__/
